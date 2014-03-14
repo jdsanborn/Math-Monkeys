@@ -8,7 +8,7 @@
  * Modified:
  * 
  * 14 March 2014 Jonathan Sanborn added threading and mutex to only allow one instance of program to run.
- * 
+ *                      http://www.ai.uga.edu/mc/SingleInstance.html
  * */
 
 using System;
@@ -50,7 +50,6 @@ namespace Math_Monkeys
                 }
                
             }
-
 
            /* XmlDocument xd = new XmlDocument();
             xd.Load(@"\t.xml");
