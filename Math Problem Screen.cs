@@ -50,7 +50,6 @@ namespace Math_Monkeys
 
             handledAssigList= _handler.ReadFile();
 
-            btnExitJungle.Text += thisJungle.JungleName;
             lblFeedbackAnswer.Font = new Font("Georgia", 40);
 
             ProblemSetting(theJungle, reportList);
@@ -61,7 +60,7 @@ namespace Math_Monkeys
         }
 
        //Process of updating student report if necessary and closing this form. 
-        private void btnExitJungle_Click(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
             //before closing we need to save the changes thre stuff needs to be save: assgmentComplete, date complete, and grade 
             double calcGrade;
@@ -292,7 +291,6 @@ namespace Math_Monkeys
             {
                 e.Handled = true;
             }
-        }
-      
+        }      
     }
 }

@@ -56,7 +56,7 @@ namespace Math_Monkeys
                 ListOfUsersDoc = new XDocument(
                        new XElement("Users",
                            new XElement("User",
-                               new XElement("Type", "Admin"),
+                               new XElement("Type", UserType.Administrator),
                                new XElement("UniqueID", count),
                                new XElement("Name", "Administrator"),
                                new XElement("LoginDate",today))));
@@ -78,7 +78,7 @@ namespace Math_Monkeys
                 if (fileIsOpen == true)
                 {
                     var newUserNode = new XElement("User", // Adds a single user 
-                            new XElement("Type", "EndUser"),
+                            new XElement("Type",  UserType.Student),
                             new XElement("UniqueID", count),
                             new XElement("Name", userName),
                             new XElement("LoginDate", dt));

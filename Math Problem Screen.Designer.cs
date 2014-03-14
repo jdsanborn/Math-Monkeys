@@ -31,10 +31,10 @@
             this.btnEnterAnswer = new System.Windows.Forms.Button();
             this.lblNumberA = new System.Windows.Forms.Label();
             this.lblNumberB = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblProblemBar = new System.Windows.Forms.Label();
             this.lblOperatorSymbol = new System.Windows.Forms.Label();
             this.imgMathMonkeys = new System.Windows.Forms.PictureBox();
-            this.btnExitJungle = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
             this.lblFeedbackAnswer = new System.Windows.Forms.Label();
             this.txtInsertAnswer = new System.Windows.Forms.TextBox();
             this.gbxMathProblem = new System.Windows.Forms.GroupBox();
@@ -45,8 +45,7 @@
             // 
             // btnEnterAnswer
             // 
-            this.btnEnterAnswer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEnterAnswer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEnterAnswer.Font = new System.Drawing.Font("Microsoft Sans Serif", 39.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEnterAnswer.Location = new System.Drawing.Point(58, 263);
             this.btnEnterAnswer.MaximumSize = new System.Drawing.Size(375, 164);
@@ -82,16 +81,16 @@
             this.lblNumberB.Text = "11";
             this.lblNumberB.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // label3
+            // lblProblemBar
             // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(58, 161);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(221, 25);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "___________________";
+            this.lblProblemBar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.lblProblemBar.AutoSize = true;
+            this.lblProblemBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblProblemBar.Location = new System.Drawing.Point(58, 161);
+            this.lblProblemBar.Name = "lblProblemBar";
+            this.lblProblemBar.Size = new System.Drawing.Size(221, 25);
+            this.lblProblemBar.TabIndex = 4;
+            this.lblProblemBar.Text = "___________________";
             // 
             // lblOperatorSymbol
             // 
@@ -108,35 +107,35 @@
             // 
             this.imgMathMonkeys.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.imgMathMonkeys.Image = global::Math_Monkeys.Properties.Resources.mathmonkeyslogo2;
-            this.imgMathMonkeys.Location = new System.Drawing.Point(696, 12);
+            this.imgMathMonkeys.Location = new System.Drawing.Point(628, 12);
             this.imgMathMonkeys.Name = "imgMathMonkeys";
             this.imgMathMonkeys.Size = new System.Drawing.Size(144, 97);
             this.imgMathMonkeys.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imgMathMonkeys.TabIndex = 6;
             this.imgMathMonkeys.TabStop = false;
             // 
-            // btnExitJungle
+            // btnExit
             // 
-            this.btnExitJungle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExitJungle.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExitJungle.Location = new System.Drawing.Point(624, 524);
-            this.btnExitJungle.Name = "btnExitJungle";
-            this.btnExitJungle.Size = new System.Drawing.Size(216, 68);
-            this.btnExitJungle.TabIndex = 7;
-            this.btnExitJungle.Text = "Exit";
-            this.btnExitJungle.UseVisualStyleBackColor = true;
-            this.btnExitJungle.Click += new System.EventHandler(this.btnExitJungle_Click);
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Location = new System.Drawing.Point(556, 482);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnExit.Size = new System.Drawing.Size(216, 68);
+            this.btnExit.TabIndex = 7;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // lblFeedbackAnswer
             // 
-            this.lblFeedbackAnswer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFeedbackAnswer.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFeedbackAnswer.Location = new System.Drawing.Point(11, 540);
+            this.lblFeedbackAnswer.Location = new System.Drawing.Point(258, 431);
             this.lblFeedbackAnswer.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFeedbackAnswer.Name = "lblFeedbackAnswer";
-            this.lblFeedbackAnswer.Size = new System.Drawing.Size(535, 55);
+            this.lblFeedbackAnswer.Size = new System.Drawing.Size(278, 55);
             this.lblFeedbackAnswer.TabIndex = 8;
-            this.lblFeedbackAnswer.Text = "Give me your best effort";
+            this.lblFeedbackAnswer.Text = "Luck";
             // 
             // txtInsertAnswer
             // 
@@ -157,7 +156,7 @@
             this.gbxMathProblem.Controls.Add(this.txtInsertAnswer);
             this.gbxMathProblem.Controls.Add(this.lblNumberA);
             this.gbxMathProblem.Controls.Add(this.lblNumberB);
-            this.gbxMathProblem.Controls.Add(this.label3);
+            this.gbxMathProblem.Controls.Add(this.lblProblemBar);
             this.gbxMathProblem.Controls.Add(this.lblOperatorSymbol);
             this.gbxMathProblem.Location = new System.Drawing.Point(230, 71);
             this.gbxMathProblem.Name = "gbxMathProblem";
@@ -179,16 +178,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(852, 604);
+            this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.lblProblemSet);
             this.Controls.Add(this.gbxMathProblem);
             this.Controls.Add(this.lblFeedbackAnswer);
-            this.Controls.Add(this.btnExitJungle);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.imgMathMonkeys);
-            this.MinimumSize = new System.Drawing.Size(400, 300);
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "Math_Problem_Screen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Math Monkeys - Problem Set";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.imgMathMonkeys)).EndInit();
             this.gbxMathProblem.ResumeLayout(false);
             this.gbxMathProblem.PerformLayout();
@@ -202,10 +202,10 @@
         private System.Windows.Forms.Button btnEnterAnswer;
         private System.Windows.Forms.Label lblNumberA;
         private System.Windows.Forms.Label lblNumberB;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblProblemBar;
         private System.Windows.Forms.Label lblOperatorSymbol;
         private System.Windows.Forms.PictureBox imgMathMonkeys;
-        private System.Windows.Forms.Button btnExitJungle;
+        private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label lblFeedbackAnswer;
         private System.Windows.Forms.TextBox txtInsertAnswer;
         private System.Windows.Forms.GroupBox gbxMathProblem;

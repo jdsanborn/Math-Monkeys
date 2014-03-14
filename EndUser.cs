@@ -41,11 +41,12 @@ namespace Math_Monkeys
 
         }
 
+        //14 March 2014 Jonathan Sanborn: User Type implmented in the User class 
         //
-        public string GetUserType()
-        {
-            return "EndUser";
-        }
+        //public string GetUserType()
+        //{
+        //    return "EndUser";
+        //}
 
         //add correct problem set or modify existing problem set making sure that not 
         protected void AddProblemSet(string problemSetName)
