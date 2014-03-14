@@ -182,7 +182,7 @@ namespace Math_Monkeys
         {
             if ((add1.CheckAnswer(answer) == true))
             {
-                GreatAnswer();
+                CorrectAnswer();
             }
             else
             {
@@ -194,7 +194,7 @@ namespace Math_Monkeys
         {
             if ((sub1.CheckAnswer(answer) == true))
             {
-                GreatAnswer();
+                CorrectAnswer();
             }
             else
             {
@@ -203,24 +203,26 @@ namespace Math_Monkeys
 
         }
         //continuing function are student feedback on their answer
-        private void GreatAnswer()
+        private void CorrectAnswer()
         {
-            lblFeedbackAnswer.Text = "Great Job!!!";
-            lblFeedbackAnswer.Font = new Font("Georgia", 50);
-            preceed += 1;
-            GetProblem();
-            txtInsertAnswer.Select();
-            txtInsertAnswer.Focus();
-        }
-        private void IncorrectAnswer()
-        {
-            lblFeedbackAnswer.Text = "Sorry, Try Again Next Time";
+            lblFeedbackAnswer.Text = "Correct";
             lblFeedbackAnswer.Font = new Font("Georgia", 35);
             preceed += 1;
             GetProblem();
             txtInsertAnswer.Select();
             txtInsertAnswer.Focus();
         }
+
+        private void IncorrectAnswer()
+        {
+            lblFeedbackAnswer.Text = "Good Try";
+            lblFeedbackAnswer.Font = new Font("Georgia", 35);
+            preceed += 1;
+            GetProblem();
+            txtInsertAnswer.Select();
+            txtInsertAnswer.Focus();
+        }
+
         // GetProble(): will go to get the next problem from the subtraction or additon class depending on user's choice using the GetNext() function
         private void GetProblem()
         {
@@ -263,19 +265,33 @@ namespace Math_Monkeys
             this.AcceptButton = btnEnterAnswer;
         }
 
-        private void lblNumberB_Click(object sender, EventArgs e)
+        /// <summary>
+        /// This method take the keypresses in the txtInsertAnswer textbox and only allows [.-0-9] into the textbox.
+        /// Created: 13 March 2014
+        /// Author: Jonathan Sanborn
+        /// </summary>
+        /// 
+        /// <param name="sender">the object that raised this event</param>
+        /// <param name="e">the KeyPressEventArgs of the text box</param>
+        private void txtInsertAnswer_KeyPress(object sender, KeyPressEventArgs e)
         {
+            //If the key is not a control key, a digit, a decimial point or a negative sign ignore it
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != '-')
+            {
+                e.Handled = true;
+            }
 
-        }
+            //If the key is a decimal point and it is the second one ignore it.
+            if (e.KeyChar == '.'  && (sender as TextBox).Text.IndexOf('.') > -1)
+            {
+                e.Handled = true;
+            }
 
-        private void lblOperatorSymbol_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void lblFeedbackAnswer_Click(object sender, EventArgs e)
-        {
-
+            //in the key is the negative sign and it is not the first charcter ignore it.
+            if (e.KeyChar == '-' && (sender as TextBox).Text.Length > 0)
+            {
+                e.Handled = true;
+            }
         }
       
     }

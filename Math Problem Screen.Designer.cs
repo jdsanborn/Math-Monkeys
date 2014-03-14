@@ -81,7 +81,6 @@
             this.lblNumberB.TabIndex = 3;
             this.lblNumberB.Text = "11";
             this.lblNumberB.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.lblNumberB.Click += new System.EventHandler(this.lblNumberB_Click);
             // 
             // label3
             // 
@@ -104,7 +103,6 @@
             this.lblOperatorSymbol.Size = new System.Drawing.Size(88, 91);
             this.lblOperatorSymbol.TabIndex = 5;
             this.lblOperatorSymbol.Text = ":(";
-            this.lblOperatorSymbol.Click += new System.EventHandler(this.lblOperatorSymbol_Click);
             // 
             // imgMathMonkeys
             // 
@@ -139,7 +137,6 @@
             this.lblFeedbackAnswer.Size = new System.Drawing.Size(535, 55);
             this.lblFeedbackAnswer.TabIndex = 8;
             this.lblFeedbackAnswer.Text = "Give me your best effort";
-            this.lblFeedbackAnswer.Click += new System.EventHandler(this.lblFeedbackAnswer_Click);
             // 
             // txtInsertAnswer
             // 
@@ -152,6 +149,7 @@
             this.txtInsertAnswer.TabIndex = 9;
             this.txtInsertAnswer.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtInsertAnswer.TextChanged += new System.EventHandler(this.txtInsertAnswer_TextChanged_1);
+            this.txtInsertAnswer.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtInsertAnswer_KeyPress);
             // 
             // gbxMathProblem
             // 

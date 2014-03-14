@@ -53,7 +53,7 @@ namespace Math_Monkeys
                 {
                     if (ddlAdminSelects.SelectedItem.ToString() == EndUserList[i].UserName)
                     {
-                        if (EndUserList[i].Type == UserType.Student)
+                        if (EndUserList[i].UserType == UserType.Student)
                         {
                             Problem_Setting_Screen_add confgProblems = new Problem_Setting_Screen_add(EndUserList[i]);
                             confgProblems.ShowDialog();
@@ -77,7 +77,7 @@ namespace Math_Monkeys
                 {
                     if (ddlAdminSelects.SelectedItem.ToString() == EndUserList[i].UserName)
                     {
-                        if (EndUserList[i].Type == UserType.Student)
+                        if (EndUserList[i].UserType == UserType.Student)
                         {
                             AddNewProblemSet NewSet = new AddNewProblemSet(EndUserList[i]);
                             NewSet.ShowDialog();
@@ -117,7 +117,7 @@ namespace Math_Monkeys
                     if (EndUserList[i].UserName == ddlAdminSelects.SelectedItem.ToString())
                     {
 
-                        if (EndUserList[i].Type == UserType.Student)
+                        if (EndUserList[i].UserType == UserType.Student)
                         {
                             ViewReport(EndUserList[i]);
                         }

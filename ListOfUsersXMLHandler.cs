@@ -115,7 +115,7 @@ namespace Math_Monkeys
                          {
                              UniqueID = int.Parse(d.Element("UniqueID").Value),
                              UserName = d.Element("Name").Value,
-                             Type = d.Element("Type").Value,
+                             UserType = (UserType) Enum.Parse(typeof(UserType), d.Element("Type").Value, true),  //hmmm
                              LoginDate = isDateSet(d.Element("LoginDate").Value),
                          }).ToList();
                 }

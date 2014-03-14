@@ -3,7 +3,16 @@
  * Date Started:  February 11, 2014
  * Date Completed: March 4, 2014
  * This Class Name: User
- * */
+
+ * MODIFIED
+ * 
+ * 13 March 2013  Jonathan Sanborn
+ * Added enum
+ * Made changes to prepare for altered xml files that include new fields
+ * 
+ * * */
+
+
 
 using System;
 using System.Collections.Generic;
@@ -20,6 +29,7 @@ namespace Math_Monkeys
 
         [XmlEnum(Name = "Administrator")]
         Administrator,
+
         [XmlEnum(Name = "Student")]
         Student
     };
@@ -94,7 +104,7 @@ namespace Math_Monkeys
             }
         }
 
-        public UserType Type
+        public UserType UserType
         {
             get
             {
@@ -105,6 +115,15 @@ namespace Math_Monkeys
                 type = value;
             }
         }
+
+        public string UserTypeString
+        {
+            get
+            {
+                 return Enum.GetName(typeof(UserType),type);
+            }
+        }
+
 
         public string FirstName
         {
@@ -178,7 +197,7 @@ namespace Math_Monkeys
         {
             ID = 0;
             LastLoginDate = DateTime.MinValue;
-            Type =  UserType.None;
+            UserType =  UserType.None;
             FirstName = string.Empty;
             LastName = string.Empty;
             ScreenName = string.Empty;
@@ -230,6 +249,7 @@ namespace Math_Monkeys
                 _uniqueId = value;
             }
         }
+
         /*
         // Methods
         // public bool GetFileData(); // get user data using UserXMLHandler
@@ -247,6 +267,8 @@ namespace Math_Monkeys
         //        _userType = value;
         //    }// return "A" for Admin or "E" for EndUser
         //}
+
+
         public DateTime? LoginDate
         {
             get

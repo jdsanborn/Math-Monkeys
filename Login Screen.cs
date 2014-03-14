@@ -59,7 +59,7 @@ namespace Math_Monkeys
                 {
                     if (ddlUserName.SelectedItem.ToString() == EndUserList[i].UserName)
                     {
-                        if (EndUserList[i].Type == UserType.Administrator)
+                        if (EndUserList[i].UserType == UserType.Administrator)
                         {
                             AdminWorking = true;
                             i = reset;
@@ -68,7 +68,7 @@ namespace Math_Monkeys
                             updateDdlist();
                             AdminWorking = false;
                         }
-                        else if (EndUserList[i].Type == UserType.Student)
+                        else if (EndUserList[i].UserType == UserType.Student)
                         {
                             Problem_Select_Screen nextscreen = new Problem_Select_Screen(EndUserList[i]);
                             nextscreen.WelcomeLabel = "WELCOME " + EndUserList[i].UserName;
