@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Admin_Control));
             this.btnRemoveSelected = new System.Windows.Forms.Button();
             this.btnCreateNewStudent = new System.Windows.Forms.Button();
             this.ddlAdminSelects = new System.Windows.Forms.ComboBox();
@@ -269,6 +270,7 @@
             this.Controls.Add(this.ddlAdminSelects);
             this.Controls.Add(this.btnCreateNewStudent);
             this.Controls.Add(this.btnRemoveSelected);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(1129, 726);
             this.Name = "Admin_Control";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form3Remove));
             this.btnRemove = new System.Windows.Forms.Button();
             this.ddlStudentRemove = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnRemove
             // 
-            this.btnRemove.Location = new System.Drawing.Point(92, 156);
-            this.btnRemove.Margin = new System.Windows.Forms.Padding(4);
+            this.btnRemove.Location = new System.Drawing.Point(69, 127);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(364, 62);
+            this.btnRemove.Size = new System.Drawing.Size(273, 50);
             this.btnRemove.TabIndex = 0;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
@@ -47,25 +47,24 @@
             // 
             this.ddlStudentRemove.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddlStudentRemove.FormattingEnabled = true;
-            this.ddlStudentRemove.Location = new System.Drawing.Point(113, 97);
-            this.ddlStudentRemove.Margin = new System.Windows.Forms.Padding(4);
+            this.ddlStudentRemove.Location = new System.Drawing.Point(85, 79);
             this.ddlStudentRemove.Name = "ddlStudentRemove";
-            this.ddlStudentRemove.Size = new System.Drawing.Size(315, 24);
+            this.ddlStudentRemove.Size = new System.Drawing.Size(237, 21);
             this.ddlStudentRemove.TabIndex = 1;
             this.ddlStudentRemove.SelectedIndexChanged += new System.EventHandler(this.ddlStudentRemove_SelectedIndexChanged_1);
             // 
             // Form3Remove
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 295);
+            this.ClientSize = new System.Drawing.Size(421, 247);
             this.Controls.Add(this.ddlStudentRemove);
             this.Controls.Add(this.btnRemove);
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(577, 342);
+            this.MaximumSize = new System.Drawing.Size(437, 285);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(577, 342);
+            this.MinimumSize = new System.Drawing.Size(437, 285);
             this.Name = "Form3Remove";
             this.Text = "Remove User";
             this.Load += new System.EventHandler(this.Form3Remove_Load);

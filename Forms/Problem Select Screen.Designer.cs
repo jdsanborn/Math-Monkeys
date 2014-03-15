@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Problem_Select_Screen));
             this.btnStartLesson = new System.Windows.Forms.Button();
             this.ddljungleNames = new System.Windows.Forms.ComboBox();
             this.lblSelectAJungle = new System.Windows.Forms.Label();
@@ -39,9 +40,9 @@
             // 
             // btnStartLesson
             // 
-            this.btnStartLesson.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStartLesson.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStartLesson.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStartLesson.Location = new System.Drawing.Point(149, 254);
             this.btnStartLesson.MaximumSize = new System.Drawing.Size(601, 75);
@@ -55,9 +56,9 @@
             // 
             // ddljungleNames
             // 
-            this.ddljungleNames.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ddljungleNames.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ddljungleNames.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ddljungleNames.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddljungleNames.FormattingEnabled = true;
@@ -71,8 +72,8 @@
             // 
             // lblSelectAJungle
             // 
-            this.lblSelectAJungle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblSelectAJungle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSelectAJungle.AutoSize = true;
             this.lblSelectAJungle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSelectAJungle.Location = new System.Drawing.Point(346, 134);
@@ -84,8 +85,8 @@
             // 
             // lblLastLoginDate
             // 
-            this.lblLastLoginDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblLastLoginDate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblLastLoginDate.AutoSize = true;
             this.lblLastLoginDate.Location = new System.Drawing.Point(131, 705);
             this.lblLastLoginDate.Name = "lblLastLoginDate";
@@ -136,6 +137,7 @@
             this.Controls.Add(this.lblSelectAJungle);
             this.Controls.Add(this.ddljungleNames);
             this.Controls.Add(this.btnStartLesson);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1202, 704);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddNewProblemSet));
             this.lblSelectProblemSet = new System.Windows.Forms.Label();
             this.lblUserNameDisplay = new System.Windows.Forms.Label();
             this.btnCancelConfig = new System.Windows.Forms.Button();
@@ -253,7 +254,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1124, 710);
-            this.ControlBox = false;
             this.Controls.Add(this.txtAssignmentName);
             this.Controls.Add(this.lblSelectProblemSet);
             this.Controls.Add(this.lblUserNameDisplay);
@@ -269,6 +269,7 @@
             this.Controls.Add(this.lblNumberofProblems);
             this.Controls.Add(this.lblGoalSet);
             this.Controls.Add(this.lblRangeSet);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

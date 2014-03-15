@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Math_Problem_Screen));
             this.btnEnterAnswer = new System.Windows.Forms.Button();
             this.lblNumberA = new System.Windows.Forms.Label();
             this.lblNumberB = new System.Windows.Forms.Label();
@@ -184,6 +185,7 @@
             this.Controls.Add(this.lblFeedbackAnswer);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.imgMathMonkeys);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "Math_Problem_Screen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

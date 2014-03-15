@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewUserForm));
             this.lblName = new System.Windows.Forms.Label();
             this.lblStartingJungle = new System.Windows.Forms.Label();
             this.ddlJungleSelection = new System.Windows.Forms.ComboBox();
@@ -92,6 +93,7 @@
             this.Controls.Add(this.ddlJungleSelection);
             this.Controls.Add(this.lblStartingJungle);
             this.Controls.Add(this.lblName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(531, 274);
             this.MinimumSize = new System.Drawing.Size(531, 274);
             this.Name = "NewUserForm";

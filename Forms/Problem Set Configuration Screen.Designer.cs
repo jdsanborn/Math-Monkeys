@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Problem_Setting_Screen_add));
             this.lblRangeSet = new System.Windows.Forms.Label();
             this.lblGoalSet = new System.Windows.Forms.Label();
             this.lblNumberofProblems = new System.Windows.Forms.Label();
@@ -223,6 +224,7 @@
             this.Controls.Add(this.lblNumberofProblems);
             this.Controls.Add(this.lblGoalSet);
             this.Controls.Add(this.lblRangeSet);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(734, 461);
             this.MinimumSize = new System.Drawing.Size(734, 461);
