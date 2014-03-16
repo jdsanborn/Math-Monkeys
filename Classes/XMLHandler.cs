@@ -2,7 +2,12 @@
  * Phase 1 Programmers: Jeff Cribben, Mary Venegas
  * Date Started:  February 11, 2014
  * Date Completed: March 4, 2014
- * This Class Name: 
+ * This Class Name:
+ * 
+ * 
+ * Modified 
+ * 15 March 2014 Jonathan Sanborn
+ * 
  * */
 using System;
 using System.Collections.Generic;
@@ -15,9 +20,11 @@ namespace Math_Monkeys
 {
     public class XMLHandler
     {
-        protected XDocument xmlDocument;
-
-        protected string fileName;
+        private XDocument xmlDocument;
+        private string fileName;
+         private bool fileIsOpen = false;
+        private bool fileIsValid;
+        
         public string FileName
         {
             get
@@ -29,9 +36,9 @@ namespace Math_Monkeys
                 FileName = value;
             }
         }
-        protected bool fileIsOpen = false;
-        private bool fileIsValid;
+       
 
+        
 
         public XMLHandler() // constructor
         {
