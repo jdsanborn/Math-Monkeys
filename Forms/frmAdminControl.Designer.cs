@@ -230,7 +230,6 @@
             this.fdAdmin.FontMustExist = true;
             this.fdAdmin.MaxSize = 20;
             this.fdAdmin.MinSize = 8;
-            this.fdAdmin.Apply += new System.EventHandler(this.fdAdmin_Apply);
             // 
             // frmAdminControl
             // 

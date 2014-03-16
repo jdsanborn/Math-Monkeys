@@ -70,7 +70,7 @@ namespace Math_Monkeys
                         }
                         else if (EndUserList[i].UserType == UserType.Student)
                         {
-                            Math_Problem_Screen nextscreen = new Math_Problem_Screen(EndUserList[i])
+                            Math_Problem_Screen nextscreen = new Math_Problem_Screen(EndUserList[i]);
                             //Problem_Select_Screen nextscreen = new Problem_Select_Screen(EndUserList[i]);
                             //nextscreen.WelcomeLabel = "WELCOME " + EndUserList[i].ScreenName;
                             nextscreen.ShowDialog();

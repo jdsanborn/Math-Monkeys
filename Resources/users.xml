@@ -9,11 +9,11 @@
 			<last></last>
 		</name>
 		<password></password>
-		<loginRecords>
+		<loginrecords>
 			<login>
 				<date></date>
 				<duration></duration>
 			</login>
-		</loginRecords>
+		</loginrecords>
 	</user>
 </users>

@@ -22,7 +22,7 @@ namespace Math_Monkeys
     {
         private XDocument xmlDocument;
         private string fileName;
-         private bool fileIsOpen = false;
+        private bool fileIsOpen = false;
         private bool fileIsValid;
         
         public string FileName

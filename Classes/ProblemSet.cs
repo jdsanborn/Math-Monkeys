@@ -9,24 +9,35 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Math_Monkeys.Classes
 {
+     [XmlType("operand")]
     public struct Operand
     {
-        int rangeMax;
-        int rangeMin;
+          [XmlElement("rangeMax")]
+        public int rangeMax;
+          [XmlElement("rangeMin")]
+        public int rangeMin;
     }
 
+     [XmlType("operation")]
     public enum Operation
     {
+         [XmlEnum(Name = "None")]
         None,
-        Addition, 
+          [XmlEnum(Name = "Addition")]
+        Addition,
+          [XmlEnum(Name = "Subtraction")]
         Subtraction,
+          [XmlEnum(Name = "Multiplicaiton")]
         Multiplication,
+          [XmlEnum(Name = "Division")]
         Division
     }
 
+    [XmlType("problemSet")]
     class ProblemSet
     {
         #region member variables
@@ -35,11 +46,13 @@ namespace Math_Monkeys.Classes
         private string name;
         private Operation operation;
         private Operand[] operand;
+        private uint numberOfProblems;
 
         #endregion
 
         #region properties
 
+        [XmlElement("id")]
         public uint ID 
         {
             get
@@ -52,6 +65,7 @@ namespace Math_Monkeys.Classes
             }
         }
 
+        [XmlElement("name")]
         public string Name
         {
             get
@@ -71,6 +85,7 @@ namespace Math_Monkeys.Classes
             }
         }
 
+        [XmlElement("operation")]
         public Operation Operation
         {
             get
@@ -83,6 +98,7 @@ namespace Math_Monkeys.Classes
             }
         }
 
+        [XmlElement("operand")]
         public Operand[] Operand
         {
             get
@@ -92,6 +108,19 @@ namespace Math_Monkeys.Classes
             set
             {
                 operand = value;
+            }
+        }
+
+        [XmlElement("numberOfProblems")]
+        public uint NumberOfProblems
+        {
+            get
+            {
+                return numberOfProblems;
+            }
+            set
+            {
+                numberOfProblems = value;
             }
         }
 

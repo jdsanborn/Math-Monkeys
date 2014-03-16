@@ -88,6 +88,7 @@
     <Compile Include="Classes\AdditionProblemSet.cs" />
     <Compile Include="Classes\Assignment.cs" />
     <Compile Include="Classes\AssignmentAttempt.cs" />
+    <Compile Include="Classes\FileHandler.cs" />
     <Compile Include="Classes\ProblemSet.cs" />
     <Compile Include="Forms\AddNewProblemSet.cs">
       <SubType>Form</SubType>
@@ -133,7 +134,7 @@
     <Compile Include="Classes\ProblemSetGenerator.cs" />
     <Compile Include="Classes\Report.cs" />
     <Compile Include="Classes\SubtractionProblemSet.cs" />
-    <Compile Include="Classes\UnsafeUserValidator.cs" />
+    <None Include="DEPRACATED Objects\UnsafeUserValidator.cs" />
     <Compile Include="Classes\User.cs" />
     <None Include="DEPRACATED Objects\UserValidator.cs" />
     <Compile Include="Forms\Problem Set Configuration Screen.cs">

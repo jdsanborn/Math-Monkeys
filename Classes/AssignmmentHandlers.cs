@@ -22,7 +22,7 @@ namespace Math_Monkeys
      * Names should be reusable and should only store ranges, problem numbers, attempts, and goal
      * */
     // Coder of this class - Mary Venegas
-    public class AssignmentHandlers : XMLHandler
+    public class AssignmentHandlers
     {
         //get a list of only admins
         public List<AssignmentSet> ListOfAssignment = new List<AssignmentSet>();
@@ -34,8 +34,52 @@ namespace Math_Monkeys
         //NumberofReports available
         private int RepNumber = 0;
 
+
+          private XDocument xmlDocument;
+            private string fileName;
+            private bool fileIsOpen = false;
+            private bool fileIsValid;
+
+            public string FileName
+            {
+                get
+                {
+                    return FileName;
+                }
+                set
+                {
+                    FileName = value;
+                }
+            }
+
+
+
+
+            public bool OpenFile(string fileName)
+            {
+                
+                if ((fileIsValid) == true)
+                {
+                    try
+                    {
+                        xmlDocument = XDocument.Load(fileName);
+                        return true;
+                    }
+                    catch (IOException e)
+                    {
+                        System.Diagnostics.Debug.Write("Error Opening File");
+                        return false;
+                    }
+                }
+                return false;
+            }
+        
         public AssignmentHandlers() //Constructor
         {
+             xmlDocument = new XDocument();
+                fileName = "Empty";
+                fileIsOpen = false;
+                fileIsValid = false;
             _fileName = "AssignmentCollection.xml";
             CreateNewAssg();
             //do nothing 

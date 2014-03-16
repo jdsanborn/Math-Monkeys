@@ -10,9 +10,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Math_Monkeys.Classes
 {
+     [XmlType("assignmentAttempt")]
     class AssignmentAttempt
     {
         #region member variables
@@ -27,6 +29,7 @@ namespace Math_Monkeys.Classes
 
         #region properties
 
+        [XmlElement("id")]
         public uint ID
         {
             get
@@ -39,6 +42,7 @@ namespace Math_Monkeys.Classes
             }
         }
 
+        [XmlElement("assignmentID")]
         public uint AssignmentID
         {
             get
@@ -51,6 +55,7 @@ namespace Math_Monkeys.Classes
             }
         }
 
+        [XmlElement("date")]
         public DateTime? Date
         {
             get
@@ -74,6 +79,7 @@ namespace Math_Monkeys.Classes
             }
         }
 
+        [XmlElement("grade")]
         public double Grade
         {
             get
@@ -97,6 +103,7 @@ namespace Math_Monkeys.Classes
             }
         }
 
+        [XmlElement("timeSpent")]
         public TimeSpan TimeSpent
         {
             get

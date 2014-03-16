@@ -103,7 +103,6 @@
             this.lblWelcomStudent.Size = new System.Drawing.Size(237, 55);
             this.lblWelcomStudent.TabIndex = 4;
             this.lblWelcomStudent.Text = "Welcome ";
-            this.lblWelcomStudent.Click += new System.EventHandler(this.lblWelcomStudent_Click);
             // 
             // btnLogOut
             // 

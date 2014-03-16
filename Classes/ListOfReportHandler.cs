@@ -40,8 +40,10 @@ using System.Xml.Linq;
 namespace Math_Monkeys
 {
     //Programmer of this class - Mary Venegas
-    public class ListOfReportHandler : XMLHandler
+    public class ListOfReportHandler 
     {
+
+        
         public List<Report> ListOfReports = new List<Report>();
 
         XDocument ListOfRepDoc;
@@ -49,9 +51,51 @@ namespace Math_Monkeys
         private string _fileName;
         //NumberofReports available
         private int RepNumber = 0;
+        private XDocument xmlDocument;
+        private string fileName;
+        private bool fileIsOpen = false;
+        private bool fileIsValid;
+        
+        public string FileName
+        {
+            get
+            {
+                return FileName;
+            }
+            set
+            {
+                FileName = value;
+            }
+        }
+       
 
+      
+       
+        public bool OpenFile(string fileName)
+        {
+            
+            if ((fileIsValid) == true)
+            {
+                try
+                {
+                    xmlDocument = XDocument.Load(fileName);
+                    return true;
+                }
+                catch (IOException e)
+                {
+                    System.Diagnostics.Debug.Write("Error Opening File");
+                    return false;
+                }
+            }
+            return false;
+        }
         public ListOfReportHandler() //Constructor
         {
+                xmlDocument = new XDocument();
+            fileName = "Empty";
+            fileIsOpen = false;
+            fileIsValid = false;
+
             //do nothing 
         }
         //When the program start ther will be not xml file existen therefore we create one with a default administrator

@@ -76,10 +76,10 @@ namespace Math_Monkeys
         //Populate the Jungle List with accesible jungle
         public void PopulateJungleList()
         {
-            ListOfJunglesHandler JungleHandler = new ListOfJunglesHandler();
+            //ListOfJunglesHandler JungleHandler = new ListOfJunglesHandler();
             ddljungleNames.Items.Clear();
-            jungleList.Clear();
-            jungleList = JungleHandler.ReadFile();
+            //jungleList.Clear();
+            //jungleList = JungleHandler.ReadFile();
 
             if (ReportList.Count == 1)
             {

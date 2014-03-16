@@ -22,9 +22,14 @@ using System.Xml.Linq;
 namespace Math_Monkeys
 {
     // Coder of this class - Jeff Cribben
-    public class ListOfUsersXMLHandler : XMLHandler
+    public class ListOfUsersXMLHandler
     {
 
+
+        private XDocument xmlDocument;
+        private string fileName;
+        private bool fileIsOpen = false;
+        private bool fileIsValid;
         //get a list of only admins
         public static List<string> adminList = new List<string>();
         //get a list of only endUser/students
@@ -37,10 +42,50 @@ namespace Math_Monkeys
         private string _fileName;
         //making sure no messing up with IDs
         private uint count = 0; // count for giving  unique ID to users
+        
+        public string FileName
+        {
+            get
+            {
+                return FileName;
+            }
+            set
+            {
+                FileName = value;
+            }
+        }
+       
+
+        public bool ValidateFile(ref XDocument xmlDocument)
+        {
+            return true;
+        }
+
+        public bool OpenFile(string fileName)
+        {
+            fileIsValid = ValidateFile(ref xmlDocument);
+            if ((fileIsValid) == true)
+            {
+                try
+                {
+                    xmlDocument = XDocument.Load(fileName);
+                    return true;
+                }
+                catch (IOException e)
+                {
+                    System.Diagnostics.Debug.Write("Error Opening File");
+                    return false;
+                }
+            }
+            return false;
+        }
 
         public ListOfUsersXMLHandler() //Constructor
         {
-            //do nothing 
+            xmlDocument = new XDocument();
+            fileName = "Empty";
+            fileIsOpen = false;
+            fileIsValid = false;
         }
 
         //When the program start ther will be not xml file existen therefore we create one with a default administrator

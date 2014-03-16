@@ -57,7 +57,6 @@
             this.lblOperatorSymbol.Size = new System.Drawing.Size(88, 91);
             this.lblOperatorSymbol.TabIndex = 5;
             this.lblOperatorSymbol.Text = ":(";
-            this.lblOperatorSymbol.Click += new System.EventHandler(this.lblOperatorSymbol_Click);
             // 
             // imgMathMonkeys
             // 
@@ -99,7 +98,6 @@
             this.gbxMathProblem.Size = new System.Drawing.Size(481, 598);
             this.gbxMathProblem.TabIndex = 10;
             this.gbxMathProblem.TabStop = false;
-            this.gbxMathProblem.Enter += new System.EventHandler(this.gbxMathProblem_Enter);
             // 
             // lblProblemSet
             // 
@@ -185,7 +183,6 @@
             this.lblNumberB.TabIndex = 3;
             this.lblNumberB.Text = "88888";
             this.lblNumberB.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            this.lblNumberB.Click += new System.EventHandler(this.lblNumberB_Click);
             // 
             // lblProblemBar
             // 
@@ -217,7 +214,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Math Monkeys - Problem Set";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.Math_Problem_Screen_Load);
             ((System.ComponentModel.ISupportInitialize)(this.imgMathMonkeys)).EndInit();
             this.gbxMathProblem.ResumeLayout(false);
             this.gbxMathProblem.PerformLayout();

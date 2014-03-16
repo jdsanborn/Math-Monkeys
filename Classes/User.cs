@@ -21,9 +21,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using System.IO; 
 
 namespace Math_Monkeys
 {
+     [XmlType("type")]
     public enum UserType 
     {
         [XmlEnum(Name = "None")]
@@ -54,7 +56,8 @@ namespace Math_Monkeys
         private string lastName;
         private string screenName;
         private string password;
-
+       
+       
         #endregion
 
         #region properties
@@ -96,10 +99,6 @@ namespace Math_Monkeys
                 if (value > DateTime.Now.AddDays(1.0))
                 {
                     lastLoginDate = DateTime.Now;
-                }
-                else if (value < DateTime.Now.AddYears(-5))
-                {
-                    lastLoginDate = DateTime.Now.AddYears(-5);
                 }
                 else
                 {
@@ -219,6 +218,7 @@ namespace Math_Monkeys
             ScreenName = string.Empty;
             Password = string.Empty;
         }
+
 
         #region constructors
 

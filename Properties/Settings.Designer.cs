@@ -52,5 +52,50 @@ namespace Math_Monkeys.Properties {
                 return ((string)(this["dateFormat"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("users.xml")]
+        public string usersFilename {
+            get {
+                return ((string)(this["usersFilename"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("assignmentAttempt.xml")]
+        public string assignmentAttempsFilename {
+            get {
+                return ((string)(this["assignmentAttempsFilename"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("assignment.xml")]
+        public string assignmentFilename {
+            get {
+                return ((string)(this["assignmentFilename"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("problemSets.xml")]
+        public string problemSetsFilename {
+            get {
+                return ((string)(this["problemSetsFilename"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("MathMonkeys\\")]
+        public string mmFolder {
+            get {
+                return ((string)(this["mmFolder"]));
+            }
+        }
     }
 }
