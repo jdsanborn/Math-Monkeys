@@ -58,9 +58,9 @@ namespace Math_Monkeys
         public void WriteReport(User student, string AssName, int Goal)
         {
             string today;
-            today = DateTime.Now.ToString("MM/dd/yyyy");
+            today = DateTime.Now.ToString(Properties.Settings.Default.dateFormat);
             DateTime? dt = null;
-            _fileName = (student.UserName + student.UniqueID.ToString() + ".xml").Replace(" ", "");
+            _fileName = (student.ScreenName + student.ID.ToString() + ".xml").Replace(" ", "");
             if (File.Exists(_fileName) == true)
             {
                 if (fileIsOpen = OpenFile(_fileName))
@@ -84,10 +84,10 @@ namespace Math_Monkeys
             //need an alternative
         }
         //when addmin creates new student program need to create an xml report for the student with default values; 
-        public void CreateNewXmlReport(string studentName, int StdId, string JungleName)
+        public void CreateNewXmlReport(string studentName, uint StdId, string JungleName)
         {
             string today;
-            today = DateTime.Now.ToString("MM/dd/yyyy");
+            today = DateTime.Now.ToString(Properties.Settings.Default.dateFormat);
             //string unknownDate= "0/"
             DateTime? dt = null;
             _fileName = (studentName.ToString() + StdId.ToString() + ".xml").Replace(" ", "");
@@ -113,8 +113,8 @@ namespace Math_Monkeys
         {
             //System.Diagnostics.Debug.Write("Grade is handler " + grade);
             string today;
-            today = DateTime.Now.ToString("MM/dd/yyyy");
-            _fileName = (student.UserName + student.UniqueID + ".xml").Replace(" ", "");
+            today = DateTime.Now.ToString(Properties.Settings.Default.dateFormat);
+            _fileName = (student.ScreenName + student.ID + ".xml").Replace(" ", "");
 
             if (File.Exists(_fileName) == true) // Checks if file exists
             {
@@ -136,7 +136,7 @@ namespace Math_Monkeys
             }
             else
             {
-                System.Diagnostics.Debug.Write("File Is not Existent for Use: " + student.UserName + student.UniqueID);
+                System.Diagnostics.Debug.Write("File Is not Existent for Use: " + student.ScreenName + student.ID);
             }
 
         }
@@ -161,7 +161,7 @@ namespace Math_Monkeys
                              AssignmentName = d.Element("AssignmentName").Value,
                              JungleName = d.Element("JungleName").Value,
                              Completed = ToBoolean(d.Element("AssignmentComplete").Value),
-                             DateAssigned = DateTime.ParseExact(d.Element("DateAssg").Value, "MM/dd/yyyy", null),
+                             DateAssigned = DateTime.ParseExact(d.Element("DateAssg").Value, Properties.Settings.Default.dateFormat, null),
                              DateAttempted = isDateSet(d.Element("DateComplete").Value),
                              AssignmentGoal = int.Parse(d.Element("Goal").Value),
                              AssignmentGrade = double.Parse(d.Element("Grade").Value)
@@ -181,7 +181,7 @@ namespace Math_Monkeys
         {
             try
             {
-                return DateTime.ParseExact(tryDate, "MM/dd/yyyy", null);
+                return DateTime.ParseExact(tryDate, Properties.Settings.Default.dateFormat, null);
 
             }
             catch (FormatException e)

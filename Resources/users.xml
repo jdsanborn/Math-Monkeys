@@ -3,12 +3,17 @@
 	<user>
 		<id></id>
 		<type></type>
-		<username></username>
+		<screenname></screenname>
 		<name>
 			<first></first>
 			<last></last>
 		</name>
 		<password></password>
-		<lastlogin></lastlogin>
+		<loginRecords>
+			<login>
+				<date></date>
+				<duration></duration>
+			</login>
+		</loginRecords>
 	</user>
 </users>

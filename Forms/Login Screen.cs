@@ -20,18 +20,18 @@ using System.IO;
 namespace Math_Monkeys
 {
     // Coder of this class - Mary Venegas + Jeff Cribben
-    public partial class Form1Login : Form
+    public partial class frmLogin : Form
     {
         private List<User> EndUserList = new List<User>();
         public bool AdminWorking = false; 
-        public Form1Login()
+        public frmLogin()
         {
 
             InitializeComponent();
             //Form1_Load(); 
         }
 
-        public Form1Login(ref User user)
+        public frmLogin(ref User user)
         {
             InitializeComponent();
             // this.ddlUserName = user;
@@ -57,7 +57,7 @@ namespace Math_Monkeys
             {
                 try
                 {
-                    if (ddlUserName.SelectedItem.ToString() == EndUserList[i].UserName)
+                    if (ddlUserName.SelectedItem.ToString() == EndUserList[i].ScreenName)
                     {
                         if (EndUserList[i].UserType == UserType.Administrator)
                         {
@@ -70,8 +70,9 @@ namespace Math_Monkeys
                         }
                         else if (EndUserList[i].UserType == UserType.Student)
                         {
-                            Problem_Select_Screen nextscreen = new Problem_Select_Screen(EndUserList[i]);
-                            nextscreen.WelcomeLabel = "WELCOME " + EndUserList[i].UserName;
+                            Math_Problem_Screen nextscreen = new Math_Problem_Screen(EndUserList[i])
+                            //Problem_Select_Screen nextscreen = new Problem_Select_Screen(EndUserList[i]);
+                            //nextscreen.WelcomeLabel = "WELCOME " + EndUserList[i].ScreenName;
                             nextscreen.ShowDialog();
                         }
                     }
@@ -108,13 +109,38 @@ namespace Math_Monkeys
             {
                 try
                 {
-                    ddlUserName.Items.Insert(i, EndUserList[i].UserName);
+                    ddlUserName.Items.Insert(i, EndUserList[i].ScreenName);
                 }
                 catch (ArgumentOutOfRangeException x)
                 {
 
                 }
             }
+        }
+
+        private void lblTodayDate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void imgMathMonkeys_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ddlUserName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

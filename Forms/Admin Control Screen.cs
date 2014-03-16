@@ -28,14 +28,14 @@ namespace Math_Monkeys
 
         public Admin_Control(User Admin)
         {
-            AdminName = Admin.UserName;
+            AdminName = Admin.GetFullName;
             InitializeComponent();
             lblWelcomAdmin.Text = "Welcome " + AdminName;
             this.WindowState = FormWindowState.Maximized;
 
             //populate dropdownList
             updateDdlist();
-            lblLastAdminLogin.Text = "Last Login: " + Admin.LoginDate.ToString();
+            lblLastAdminLogin.Text = "Last Login: " + Admin.LastLoginDate.ToString();
         }
 
         private void btnLogOutAdmin_Click(object sender, EventArgs e)
@@ -51,7 +51,7 @@ namespace Math_Monkeys
             {
                 try
                 {
-                    if (ddlAdminSelects.SelectedItem.ToString() == EndUserList[i].UserName)
+                    if (ddlAdminSelects.SelectedItem.ToString() == EndUserList[i].ScreenName)
                     {
                         if (EndUserList[i].UserType == UserType.Student)
                         {
@@ -75,7 +75,7 @@ namespace Math_Monkeys
             {
                 try
                 {
-                    if (ddlAdminSelects.SelectedItem.ToString() == EndUserList[i].UserName)
+                    if (ddlAdminSelects.SelectedItem.ToString() == EndUserList[i].ScreenName)
                     {
                         if (EndUserList[i].UserType == UserType.Student)
                         {
@@ -114,7 +114,7 @@ namespace Math_Monkeys
             {
                 try
                 {
-                    if (EndUserList[i].UserName == ddlAdminSelects.SelectedItem.ToString())
+                    if (EndUserList[i].ScreenName == ddlAdminSelects.SelectedItem.ToString())
                     {
 
                         if (EndUserList[i].UserType == UserType.Student)
@@ -140,7 +140,7 @@ namespace Math_Monkeys
             {
                 //dtgAdministrator.Rows.Clear();
                 dtgAdministrator.Columns.Clear();
-                string fileName = (student.UserName + student.UniqueID.ToString() + ".xml").Replace(" ", "");
+                string fileName = (student.ScreenName + student.ID.ToString() + ".xml").Replace(" ", "");
                 try
                 {
                     XmlDataDocument xmldata = new XmlDataDocument();
@@ -175,7 +175,7 @@ namespace Math_Monkeys
             {
                 try
                 {
-                    ddlAdminSelects.Items.Insert(i, EndUserList[i + 1].UserName);
+                    ddlAdminSelects.Items.Insert(i, EndUserList[i + 1].ScreenName);
                 }
                 catch (ArgumentOutOfRangeException x)
                 {

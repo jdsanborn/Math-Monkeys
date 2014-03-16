@@ -4,6 +4,10 @@
  * Date Completed: March 4, 2014
  * This Class Name: NewUserForm
  * 
+ * Modified
+ * March 15, 2014 Name: Harvey Mercado & Jonathan Sanborn
+ * Changed ID types from int to uint
+ * 
  * */
 
 using System;
@@ -66,7 +70,7 @@ namespace Math_Monkeys
             {
                 string Name = (txtNewName.Text).Trim();
                 Name = CleanInput(Name);
-               int Userid= AddNametoDoc(Name);
+               uint Userid= AddNametoDoc(Name);
                 //NewUserHandler.GetId(Name)
                 NewUserReport.CreateNewXmlReport(Name, Userid-1, ddlJungleSelection.SelectedItem.ToString());
             }
@@ -77,7 +81,7 @@ namespace Math_Monkeys
             //need to verify that this name has correct caracters
             this.Close();
         }
-        private int  AddNametoDoc(string Name)
+        private uint  AddNametoDoc(string Name)
         {
             
             NewUserHandler.WriteFile("ListOfUsers.xml",Name);

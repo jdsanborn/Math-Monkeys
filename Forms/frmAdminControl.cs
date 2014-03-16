@@ -15,5 +15,18 @@ namespace Math_Monkeys
         {
             InitializeComponent();
         }
+
+        private void frmAdminControl_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFont_Click(object sender, EventArgs e)
+        {
+            fdAdmin.ShowDialog(this);
+            Properties.Settings.Default.Save();
+        }
+
+ 
     }
 }

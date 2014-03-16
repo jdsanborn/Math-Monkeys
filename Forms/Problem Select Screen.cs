@@ -31,7 +31,7 @@ namespace Math_Monkeys
         {
             _student = student;
             string today;
-            today = DateTime.Now.ToString("MM/dd/yyyy");
+            today = DateTime.Now.ToString(Properties.Settings.Default.dateFormat); 
 
             this.WindowState = FormWindowState.Maximized;
             InitializeComponent();
@@ -39,9 +39,8 @@ namespace Math_Monkeys
             GetUserReport(student);
             PopulateJungleList();
 
-                lblLastLoginDate.Text = "Last Login: "+ student.LoginDate.ToString();
+                lblLastLoginDate.Text = "Last Login: " + student.LastLoginDate.ToString();
                 if (lblLastLoginDate.Text == "Last Login: ") lblLastLoginDate.Text = today; 
-
 
         }
 
@@ -53,16 +52,16 @@ namespace Math_Monkeys
             {
                 if (ddljungleNames.SelectedItem.ToString() == jungleList[i].JungleName)
                 {
-                    try
-                    {
-                        Math_Problem_Screen nextMathscreen = new Math_Problem_Screen(jungleList[i], ReportList, _student);
-                        nextMathscreen.ShowDialog();
+                    //try
+                    //{
+                   //     Math_Problem_Screen nextMathscreen = new Math_Problem_Screen(jungleList[i], ReportList, _student);
+                   //     nextMathscreen.ShowDialog();
                         GetUserReport(_student);
-                    }
-                    catch (ObjectDisposedException ObjDisEx)
-                    {
+                    //}
+                    //catch (ObjectDisposedException ObjDisEx)
+                    //{
 
-                    }
+                    //}
                 }
             }
         }
@@ -121,7 +120,7 @@ namespace Math_Monkeys
         public void GetUserReport(User student)
         {
             //Report handler "ReadFile" could be implemented by taking the user as a parameter
-            _fileNameReport = (student.UserName + student.UniqueID + ".xml").Replace(" ", "");
+            _fileNameReport = (student.ScreenName + student.ID + ".xml").Replace(" ", "");
             ReportList = StudentReport.ReadFile(_fileNameReport);
         }
 
@@ -134,5 +133,6 @@ namespace Math_Monkeys
         {
             this.Close();
         }
+
     }
 }

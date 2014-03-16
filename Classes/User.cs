@@ -9,6 +9,8 @@
  * 13 March 2013  Jonathan Sanborn
  * Added enum
  * Made changes to prepare for altered xml files that include new fields
+ * 15 March 2013 Harvey Mercado & Jonathan Sanborn
+ * Updated user class to match changes made to XML structure
  * 
  * * */
 
@@ -37,10 +39,10 @@ namespace Math_Monkeys
     [XmlType("User")]
     public class User
     {
-        private int _uniqueId;
-        private string _fullName;
-        private string _userType;
-        private DateTime? _LoginDate;
+        //private int _uniqueId;
+        //private string _fullName;
+        //private string _userType;
+        //private DateTime? _LoginDate;
 
 
         #region Member Variables
@@ -57,6 +59,7 @@ namespace Math_Monkeys
 
         #region properties
 
+        [XmlElement("id")]
         public uint ID 
         { 
             get
@@ -81,6 +84,7 @@ namespace Math_Monkeys
             }
         }
 
+        [XmlElement("date")]
         public DateTime? LastLoginDate
         {
             get 
@@ -104,6 +108,7 @@ namespace Math_Monkeys
             }
         }
 
+        [XmlElement("type")]
         public UserType UserType
         {
             get
@@ -116,7 +121,7 @@ namespace Math_Monkeys
             }
         }
 
-        public string UserTypeString
+        public string GetUserType
         {
             get
             {
@@ -124,7 +129,7 @@ namespace Math_Monkeys
             }
         }
 
-
+        [XmlElement("first")]
         public string FirstName
         {
             get { return firstName; }
@@ -140,6 +145,7 @@ namespace Math_Monkeys
             }
         }
 
+        [XmlElement("last")]
         public string LastName
         {
             get { return lastName; }
@@ -156,6 +162,7 @@ namespace Math_Monkeys
             }
         }
 
+        [XmlElement("screenName")]
         public string ScreenName
         {
             get { return screenName; }
@@ -172,6 +179,7 @@ namespace Math_Monkeys
             }
         }
 
+        [XmlElement("password")]
         public string Password
         {
             get
@@ -188,6 +196,14 @@ namespace Math_Monkeys
                 {
                     password = value;
                 }
+            }
+        }
+
+        public string GetFullName 
+        {
+            get
+            {
+                return FirstName + " " + LastName;
             }
         }
 
@@ -211,44 +227,57 @@ namespace Math_Monkeys
             init();
         }
 
-        public User(int Id, string fullName, string userType)
+        public User(uint id, UserType userType, string fistName, string lastName, string screenName, string password )
         {
             init();
 
             //-1 value will not show up and will be assigned by the XML file
-            _uniqueId = Id;
-            _fullName = fullName;
-            _userType = userType;
+            this.ID = id;
+            this.UserType = userType;
+            this.FirstName = fistName;
+            this.LastName = lastName;
+			this.ScreenName = screenName;
+            this.Password = password;
+
+            //Name needs to be first and last
+			//_fullName = fullName;
+						
+			//userType changed to enumeration
+            //_userType = userType;
         }
 
         #endregion
 
-        // Fields
-        // ListOfUsersXMLHandler userFile { get; set; }
-        [XmlElement("UserName")]
-        public string UserName
-        {
-            get
-            {
-                return _fullName;
-            }
-            set
-            {
-                _fullName = value;
-            }
-        }
-        [XmlElement("UniqueID")]
-        public int UniqueID
-        {
-            get
-            {
-                return _uniqueId;
-            }
-            set
-            {
-                _uniqueId = value;
-            }
-        }
+
+        //Replaced by first and last names
+        //// Fields
+        //// ListOfUsersXMLHandler userFile { get; set; }
+        //[XmlElement("UserName")]
+        //public string UserName
+        //{
+        //    get
+        //    {
+        //        return _fullName;
+        //    }
+        //    set
+        //    {
+        //        _fullName = value;
+        //    }
+        //}
+
+        //Replaced by id and the unsigned int type
+        //[XmlElement("UniqueID")]
+        //public int UniqueID
+        //{
+        //    get
+        //    {
+        //        return _uniqueId;
+        //    }
+        //    set
+        //    {
+        //        _uniqueId = value;
+        //    }
+        //}
 
         /*
         // Methods
@@ -268,17 +297,5 @@ namespace Math_Monkeys
         //    }// return "A" for Admin or "E" for EndUser
         //}
 
-
-        public DateTime? LoginDate
-        {
-            get
-            {
-                return _LoginDate; 
-            }
-            set
-            {
-                _LoginDate = value;
-            }
-        }
     }
 }

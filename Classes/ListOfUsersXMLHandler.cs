@@ -36,7 +36,7 @@ namespace Math_Monkeys
         //an appropiate name for the file we will be using 
         private string _fileName;
         //making sure no messing up with IDs
-        private int count = 0; // count for giving  unique ID to users
+        private uint count = 0; // count for giving  unique ID to users
 
         public ListOfUsersXMLHandler() //Constructor
         {
@@ -47,7 +47,7 @@ namespace Math_Monkeys
         public void WriteNewFile(string fName)
         {
             string today;
-            today = DateTime.Now.ToString("MM/dd/yyyy");
+            today = DateTime.Now.ToString(Properties.Settings.Default.dateFormat);
             //make sure that count should be zero 
             if (count == 0)
             {
@@ -113,10 +113,10 @@ namespace Math_Monkeys
                         
                          new User
                          {
-                             UniqueID = int.Parse(d.Element("UniqueID").Value),
-                             UserName = d.Element("Name").Value,
+                             ID = uint.Parse(d.Element("UniqueID").Value),
+                             ScreenName = d.Element("Name").Value,
                              UserType = (UserType) Enum.Parse(typeof(UserType), d.Element("Type").Value, true),  //hmmm
-                             LoginDate = isDateSet(d.Element("LoginDate").Value),
+                             LastLoginDate = isDateSet(d.Element("LoginDate").Value),
                          }).ToList();
                 }
                 catch (System.ArgumentOutOfRangeException e)
@@ -149,7 +149,7 @@ namespace Math_Monkeys
             {
                 try
                 {
-                    userName = listOfUsers[i].UserName;
+                    userName = listOfUsers[i].ScreenName;
                     //userType = listOfUsers[i].UserType;
                     endUserList.Add(userName);
                     //System.Diagnostics.Debug.Write("IN LOOP" + endUserList[i]);
@@ -187,12 +187,13 @@ namespace Math_Monkeys
                   //Scan through file, if Xelement == "EndUser", add userName to list
                   return endUserList;
               }*/
+
         //handleling nullable date
         public DateTime? isDateSet(string tryDate)
         {
             try
             {
-                return DateTime.ParseExact(tryDate, "MM/dd/yyyy", null);
+                return DateTime.ParseExact(tryDate, Properties.Settings.Default.dateFormat, null);
 
             }
             catch (FormatException e)
@@ -202,7 +203,7 @@ namespace Math_Monkeys
         }
         
         //this will allow us to determine what ID to assign to a new user
-        public int getCount(string fName)
+        public uint getCount(string fName)
         {
             ReadFile(fName);
             int index = listOfUsers.Count;
@@ -212,7 +213,7 @@ namespace Math_Monkeys
             }
             else
             {
-                return (listOfUsers[index - 1].UniqueID + 1);
+                return (listOfUsers[index - 1].ID + 1);
             }
         }
 
@@ -233,14 +234,14 @@ namespace Math_Monkeys
         public void updateLoginDate(User student, string fileName)
         {
             string today;
-            today = DateTime.Now.ToString("MM/dd/yyyy");
+            today = DateTime.Now.ToString(Properties.Settings.Default.dateFormat);
 
             if (File.Exists(fileName) == true) // Checks if file exists
             {
                 xmlDocument = XDocument.Load(fileName);
                 var query = from item in xmlDocument.Descendants("User")
-                            where (item.Element("Name").Value == student.UserName &&
-                            item.Element("UniqueID").Value == student.UniqueID.ToString())
+                            where (item.Element("Name").Value == student.ScreenName &&
+                            item.Element("UniqueID").Value == student.ID.ToString())
                             select item;
                 foreach (XElement itemE in query)
                 {
