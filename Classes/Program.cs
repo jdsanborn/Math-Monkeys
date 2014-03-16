@@ -42,7 +42,7 @@ namespace Math_Monkeys
                 {
                     Application.EnableVisualStyles();
                     Application.SetCompatibleTextRenderingDefault(false);
-                    Application.Run(new Form1Login()); 
+                    Application.Run(new frmLogin()); 
                 }
                 else
                 {

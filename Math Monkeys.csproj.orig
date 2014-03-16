@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{13494355-EB42-4036-B780-CE03F31DBE3C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Math_Monkeys</RootNamespace>
+    <AssemblyName>Math Monkeys</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>C:\Users\jdsanborn\SkyDrive\Documents\CS 441 Software Engineering\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>3</ApplicationRevision>
+    <ApplicationVersion>2.0.1.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>5670CC65A5DBF3B3180CA506B64BC8F6B116B823</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\Math Monkeys Logo 2.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\AdditionProblemSet.cs" />
+    <Compile Include="Classes\Assignment.cs" />
+    <Compile Include="Classes\AssignmentAttempt.cs" />
+    <Compile Include="Classes\ProblemSet.cs" />
+    <Compile Include="Forms\AddNewProblemSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddNewProblemSet.Designer.cs">
+      <DependentUpon>AddNewProblemSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Admin Control Screen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Admin Control Screen.Designer.cs">
+      <DependentUpon>Admin Control Screen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Admin.cs" />
+    <None Include="DEPRACATED Objects\AppHelper.cs" />
+    <Compile Include="Classes\AssignmentSet.cs" />
+    <Compile Include="Classes\AssignmmentHandlers.cs" />
+    <Compile Include="Forms\AssignNewProblemSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AssignNewProblemSet.Designer.cs">
+      <DependentUpon>AssignNewProblemSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Control.cs" />
+    <Compile Include="Forms\Create New User Screen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Create New User Screen.Designer.cs">
+      <DependentUpon>Create New User Screen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\EndUser.cs" />
+    <Compile Include="Classes\FormDefaults.cs" />
+    <Compile Include="Forms\frmAdminControl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAdminControl.Designer.cs">
+      <DependentUpon>frmAdminControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Jungle.cs" />
+    <None Include="DEPRACATED Objects\ListOfJunglesHandler.cs" />
+    <Compile Include="Classes\ListOfReportHandler.cs" />
+    <Compile Include="Classes\ListOfUsersXMLHandler.cs" />
+    <Compile Include="Classes\ProblemSetGenerator.cs" />
+    <Compile Include="Classes\Report.cs" />
+    <Compile Include="Classes\SubtractionProblemSet.cs" />
+    <Compile Include="Classes\UnsafeUserValidator.cs" />
+    <Compile Include="Classes\User.cs" />
+    <None Include="DEPRACATED Objects\UserValidator.cs" />
+    <Compile Include="Forms\Problem Set Configuration Screen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Problem Set Configuration Screen.Designer.cs">
+      <DependentUpon>Problem Set Configuration Screen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Remove User Screen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Remove User Screen.Designer.cs">
+      <DependentUpon>Remove User Screen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Login Screen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Login Screen.Designer.cs">
+      <DependentUpon>Login Screen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Math Problem Screen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Math Problem Screen.Designer.cs">
+      <DependentUpon>Math Problem Screen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Problem Select Screen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Problem Select Screen.Designer.cs">
+      <DependentUpon>Problem Select Screen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Classes\Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="DEPRACATED Objects\UserXMLHandler.cs" />
+    <Compile Include="Classes\XMLHandler.cs" />
+    <EmbeddedResource Include="Forms\AddNewProblemSet.resx">
+      <DependentUpon>AddNewProblemSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Admin Control Screen.resx">
+      <DependentUpon>Admin Control Screen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AssignNewProblemSet.resx">
+      <DependentUpon>AssignNewProblemSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Create New User Screen.resx">
+      <DependentUpon>Create New User Screen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAdminControl.resx">
+      <DependentUpon>frmAdminControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Problem Set Configuration Screen.resx">
+      <DependentUpon>Problem Set Configuration Screen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Remove User Screen.resx">
+      <DependentUpon>Remove User Screen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Login Screen.resx">
+      <DependentUpon>Login Screen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Math Problem Screen.resx">
+      <DependentUpon>Math Problem Screen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Problem Select Screen.resx">
+      <DependentUpon>Problem Select Screen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Math Monkeys_1_TemporaryKey.pfx" />
+    <None Include="Math Monkeys_TemporaryKey.pfx" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mathmonkeyslogo2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Math Monkeys Logo 2.ico" />
+    <None Include="Resources\Math Monkeys Logo.jpg" />
+    <None Include="Resources\Math Monkeys Logo 2.png" />
+    <None Include="Resources\MM Icon.bmp" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

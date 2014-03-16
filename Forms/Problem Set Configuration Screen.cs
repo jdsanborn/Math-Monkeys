@@ -32,7 +32,7 @@ namespace Math_Monkeys
             _student = student;
             InitializeComponent();
             //display student
-            lblUserNameDisplay.Text = "Student: " + student.UserName;
+            lblUserNameDisplay.Text = "Student: " + student.ScreenName;
 
             //read from assignment list
             handledAssigList = _handler.ReadFile();

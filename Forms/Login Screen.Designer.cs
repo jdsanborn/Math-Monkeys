@@ -1,6 +1,6 @@
 ﻿namespace Math_Monkeys
 {
-    partial class Form1Login
+    partial class frmLogin
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1Login));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.imgMathMonkeys = new System.Windows.Forms.PictureBox();
             this.ddlUserName = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,38 +41,42 @@
             // 
             // imgMathMonkeys
             // 
-            this.imgMathMonkeys.Image = global::Math_Monkeys.Properties.Resources.mathmonkeyslogo2;
-            this.imgMathMonkeys.Location = new System.Drawing.Point(101, 62);
+            this.imgMathMonkeys.Image = global::Math_Monkeys.Properties.Resources.Math_Monkeys_Logo_2;
+            this.imgMathMonkeys.Location = new System.Drawing.Point(99, 105);
             this.imgMathMonkeys.Name = "imgMathMonkeys";
             this.imgMathMonkeys.Size = new System.Drawing.Size(336, 194);
+            this.imgMathMonkeys.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgMathMonkeys.TabIndex = 0;
             this.imgMathMonkeys.TabStop = false;
+            this.imgMathMonkeys.Click += new System.EventHandler(this.imgMathMonkeys_Click);
             // 
             // ddlUserName
             // 
             this.ddlUserName.BackColor = System.Drawing.SystemColors.Window;
             this.ddlUserName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ddlUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ddlUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ddlUserName.FormattingEnabled = true;
-            this.ddlUserName.Location = new System.Drawing.Point(44, 301);
+            this.ddlUserName.Location = new System.Drawing.Point(42, 338);
             this.ddlUserName.Name = "ddlUserName";
-            this.ddlUserName.Size = new System.Drawing.Size(450, 47);
+            this.ddlUserName.Size = new System.Drawing.Size(450, 41);
             this.ddlUserName.TabIndex = 0;
+            this.ddlUserName.SelectedIndexChanged += new System.EventHandler(this.ddlUserName_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(47, 259);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(93, 302);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(435, 39);
+            this.label1.Size = new System.Drawing.Size(368, 33);
             this.label1.TabIndex = 2;
             this.label1.Text = "Please Choose Your Name";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnBegin
             // 
-            this.btnBegin.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBegin.Location = new System.Drawing.Point(44, 381);
+            this.btnBegin.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBegin.Location = new System.Drawing.Point(42, 385);
             this.btnBegin.MaximumSize = new System.Drawing.Size(450, 68);
             this.btnBegin.Name = "btnBegin";
             this.btnBegin.Size = new System.Drawing.Size(450, 68);
@@ -84,13 +88,14 @@
             // lblTodayDate
             // 
             this.lblTodayDate.AutoSize = true;
-            this.lblTodayDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTodayDate.Location = new System.Drawing.Point(101, 9);
+            this.lblTodayDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTodayDate.Location = new System.Drawing.Point(-217, -182);
             this.lblTodayDate.Name = "lblTodayDate";
-            this.lblTodayDate.Size = new System.Drawing.Size(337, 37);
+            this.lblTodayDate.Size = new System.Drawing.Size(307, 33);
             this.lblTodayDate.TabIndex = 4;
             this.lblTodayDate.Text = "MM/DD/YYYY HH:MM";
             this.lblTodayDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblTodayDate.Click += new System.EventHandler(this.lblTodayDate_Click);
             // 
             // tmrClock
             // 
@@ -98,7 +103,7 @@
             this.tmrClock.Interval = 10000;
             this.tmrClock.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // Form1Login
+            // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -113,7 +118,7 @@
             this.MaximumSize = new System.Drawing.Size(550, 500);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(550, 500);
-            this.Name = "Form1Login";
+            this.Name = "frmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Math Monkeys - Login";
             this.Load += new System.EventHandler(this.Form1_Load);

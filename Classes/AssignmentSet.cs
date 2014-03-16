@@ -5,6 +5,10 @@
  * This Class Name: AssignmentSet
  * assignment set contrans, a name, bottom range, toprange, number of problems, goal, and attemps 
  * usually created by admin from the admin form 
+ * 
+ * Modified
+ * March 15, 2014 Name: Harvey Mercado & Jonathan Sanborn
+ * Depreciated 
  * */
 using System;
 using System.Collections.Generic;

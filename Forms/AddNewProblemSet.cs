@@ -30,7 +30,7 @@ namespace Math_Monkeys
         {
             _Student = student;
             InitializeComponent();
-            lblUserNameDisplay.Text = "Student Name: " + _Student.UserName;
+            lblUserNameDisplay.Text = "Student Name: " + _Student.ScreenName;
         }
 
         private void AddNewProblemSet_Load(object sender, EventArgs e)

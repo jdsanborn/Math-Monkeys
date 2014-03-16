@@ -21,11 +21,16 @@ namespace Math_Monkeys
     public partial class Math_Problem_Screen : Form
     {
         private int preceed=0;
-        private int jungle;//helps determine which type of math operation we are following
+        private List<Report> ReportList = new List<Report>();
+
+        //Jungle Selection removed at customer request
+        //private int jungle;//helps determine which type of math operation we are following
+        
         private string[] number; //holds numbers will use a delimeter for '+' or '-', 
         SubtractionProblemSet sub1 ;
         AdditionProblemSet add1;
-        Jungle thisJungle= new Jungle();
+        //Jungle Selection removed at customer request
+        //Jungle thisJungle= new Jungle();
         List<AssignmentSet> handledAssigList = new List<AssignmentSet>();
         AssignmentHandlers _handler= new AssignmentHandlers(); 
         AssignmentSet _mathSetting=new AssignmentSet();
@@ -38,10 +43,11 @@ namespace Math_Monkeys
          * Time to ask users some Math Questions
          * 
          * */
-        public Math_Problem_Screen(Jungle theJungle, List<Report> reportList,User student)
+        public Math_Problem_Screen(User student, AssignmentSet assignment)
         {
-            thisJungle = theJungle;
-            _student = student;
+            //Jungle Selection removed at customer request
+            //thisJungle = theJungle;
+            //_student = student;
             
            
             this.WindowState = FormWindowState.Maximized;
@@ -50,12 +56,12 @@ namespace Math_Monkeys
 
             handledAssigList= _handler.ReadFile();
 
-            lblFeedbackAnswer.Font = new Font("Georgia", 40);
+            //Font databound and moved to settings
+            //lblFeedbackAnswer.Font = new Font("Georgia", 40);
 
-            ProblemSetting(theJungle, reportList);
+            //ProblemSetting(theJungle, reportList);
             txtInsertAnswer.Select();
             txtInsertAnswer.Focus();
-
 
         }
 
@@ -63,27 +69,28 @@ namespace Math_Monkeys
         private void btnExit_Click(object sender, EventArgs e)
         {
             //before closing we need to save the changes thre stuff needs to be save: assgmentComplete, date complete, and grade 
-            double calcGrade;
-            if (attempted == true)
-            {
-                if (jungle == 1)
-                {
-                    calcGrade = ((Convert.ToDouble(add1.CorrectSoFar) / Convert.ToDouble(add1.NumberOfProblems)) * 100.00);
-                    //System.Diagnostics.Debug.Write("Grade Calculation:::+> " + add1.CorrectSoFar + "div" + add1.NumberOfProblems +"Gives"+calcGrade);
-                    saveSetting.UpdateReport(_student, calcGrade, thisJungle, _stdReport);
-                }
-                else if (jungle == 2)
-                {
-                    calcGrade = (sub1.CorrectSoFar / sub1.NumberOfProblems) * 100;
-                    //System.Diagnostics.Debug.Write("Grade Calculation:::+> " + sub1.CorrectSoFar + "div" + sub1.NumberOfProblems +"Gives"+ calcGrade);
-                    //System.Diagnostics.Debug.Write("Grade is handler " + calcGrade);
-                    saveSetting.UpdateReport(_student, calcGrade, thisJungle, _stdReport);
-                }
-                attempted = false;
-            }
+            //double calcGrade;
+            //if (attempted == true)
+            //{
+            //    if (jungle == 1)
+            //    {
+            //        calcGrade = ((Convert.ToDouble(add1.CorrectSoFar) / Convert.ToDouble(add1.NumberOfProblems)) * 100.00);
+            //        //System.Diagnostics.Debug.Write("Grade Calculation:::+> " + add1.CorrectSoFar + "div" + add1.NumberOfProblems +"Gives"+calcGrade);
+            //        saveSetting.UpdateReport(_student, calcGrade, thisJungle, _stdReport);
+            //    }
+            //    else if (jungle == 2)
+            //    {
+            //        calcGrade = (sub1.CorrectSoFar / sub1.NumberOfProblems) * 100;
+            //        //System.Diagnostics.Debug.Write("Grade Calculation:::+> " + sub1.CorrectSoFar + "div" + sub1.NumberOfProblems +"Gives"+ calcGrade);
+            //        //System.Diagnostics.Debug.Write("Grade is handler " + calcGrade);
+            //        saveSetting.UpdateReport(_student, calcGrade, thisJungle, _stdReport);
+            //    }
+            //    attempted = false;
+            //}
             this.Close();
         }
         //when inputing an answer we wan to make sure user entered number 
+        
         private void btnEnterAnswer_Click(object sender, EventArgs e)
         {
             attempted = true;
@@ -92,17 +99,9 @@ namespace Math_Monkeys
             if (txtInsertAnswer.Text != "")
             {
                 theAnswer = txtInsertAnswer.Text.Replace(" ", "");
-                //conver to integer 
-                try
-                {
-                    Convert.ToInt32(theAnswer);
-                    isNumber = true;
-                }
-                catch (FormatException ex)
-                {
-                    isNumber = false;
-                    MessageBox.Show("Please Insert Answers As Numbers ");
-                }
+               
+               double.Parse(theAnswer);
+                
 
                 if ((txtInsertAnswer.Text != "" && isNumber == true))
                 {
@@ -291,6 +290,15 @@ namespace Math_Monkeys
             {
                 e.Handled = true;
             }
-        }      
+        }
+
+        public void GetUserReport(User student)
+        {
+            //Report handler "ReadFile" could be implemented by taking the user as a parameter
+            _fileNameReport = (student.ScreenName + student.ID + ".xml").Replace(" ", "");
+            ReportList = StudentReport.ReadFile(_fileNameReport);
+        }
+
+        
     }
 }
