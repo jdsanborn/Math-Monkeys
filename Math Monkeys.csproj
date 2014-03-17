@@ -103,6 +103,7 @@
       <DependentUpon>Admin Control Screen.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\Admin.cs" />
+    <Compile Include="Settings.cs" />
     <None Include="DEPRACATED Objects\AppHelper.cs" />
     <Compile Include="Classes\AssignmentSet.cs" />
     <Compile Include="Classes\AssignmmentHandlers.cs" />
@@ -112,7 +113,7 @@
     <Compile Include="Forms\AssignNewProblemSet.Designer.cs">
       <DependentUpon>AssignNewProblemSet.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Control.cs" />
+    <Compile Include="Classes\MMControl.cs" />
     <Compile Include="Forms\Create New User Screen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,7 +257,9 @@
     <None Include="Resources\Math Monkeys Logo 2.png" />
     <None Include="Resources\MM Icon.bmp" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

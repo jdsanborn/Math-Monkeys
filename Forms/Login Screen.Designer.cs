@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmLogin));
             this.imgMathMonkeys = new System.Windows.Forms.PictureBox();
             this.ddlUserName = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblPleaseChoose = new System.Windows.Forms.Label();
             this.btnBegin = new System.Windows.Forms.Button();
             this.lblTodayDate = new System.Windows.Forms.Label();
             this.tmrClock = new System.Windows.Forms.Timer(this.components);
@@ -62,16 +62,16 @@
             this.ddlUserName.TabIndex = 0;
             this.ddlUserName.SelectedIndexChanged += new System.EventHandler(this.ddlUserName_SelectedIndexChanged);
             // 
-            // label1
+            // lblPleaseChoose
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(93, 302);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(368, 33);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Please Choose Your Name";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.lblPleaseChoose.AutoSize = true;
+            this.lblPleaseChoose.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPleaseChoose.Location = new System.Drawing.Point(93, 302);
+            this.lblPleaseChoose.Name = "lblPleaseChoose";
+            this.lblPleaseChoose.Size = new System.Drawing.Size(368, 33);
+            this.lblPleaseChoose.TabIndex = 2;
+            this.lblPleaseChoose.Text = "Please Choose Your Name";
+            this.lblPleaseChoose.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnBegin
             // 
@@ -89,7 +89,7 @@
             // 
             this.lblTodayDate.AutoSize = true;
             this.lblTodayDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTodayDate.Location = new System.Drawing.Point(-217, -182);
+            this.lblTodayDate.Location = new System.Drawing.Point(116, 69);
             this.lblTodayDate.Name = "lblTodayDate";
             this.lblTodayDate.Size = new System.Drawing.Size(307, 33);
             this.lblTodayDate.TabIndex = 4;
@@ -110,7 +110,7 @@
             this.ClientSize = new System.Drawing.Size(534, 462);
             this.Controls.Add(this.lblTodayDate);
             this.Controls.Add(this.btnBegin);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblPleaseChoose);
             this.Controls.Add(this.ddlUserName);
             this.Controls.Add(this.imgMathMonkeys);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -131,7 +131,7 @@
         #endregion
 
         private System.Windows.Forms.PictureBox imgMathMonkeys;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblPleaseChoose;
         private System.Windows.Forms.Button btnBegin;
         private System.Windows.Forms.Label lblTodayDate;
         private System.Windows.Forms.Timer tmrClock;

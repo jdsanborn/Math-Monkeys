@@ -24,10 +24,20 @@ namespace Math_Monkeys
     {
         private List<User> EndUserList = new List<User>();
         public bool AdminWorking = false; 
-        public frmLogin()
+
+        private MMControl MMControl;
+
+        public frmLogin(MMControl mmControl)
         {
 
             InitializeComponent();
+            this.ddlUserName.SelectedIndexChanged += new EventHandler(mmControl.SelectionChanged);
+            this.btnBegin.Click += new EventHandler(mmControl.Login);
+            this.FormClosing += new FormClosingEventHandler(mmControl.LoginFormClosing);
+            MMControl = mmControl;
+            ddlUserName.DataSource = mmControl.AllUserList;
+            ddlUserName.DisplayMember = "ScreenName";
+            ddlUserName.Update();
             //Form1_Load(); 
         }
 
@@ -36,6 +46,7 @@ namespace Math_Monkeys
             InitializeComponent();
             // this.ddlUserName = user;
         }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             //set time
@@ -43,9 +54,8 @@ namespace Math_Monkeys
           this.lblTodayDate.Text += " "; 
           this.lblTodayDate.Text +=DateTime.Now.ToShortTimeString();
           updateDdlist();
-          
-
         }
+
         //when begin button is hit we determine which user was chosen and they applay the correct action
         //if admin type open the admin application, else if enduser open the math session
         private void btnBegin_Click(object sender, EventArgs e)
@@ -84,6 +94,7 @@ namespace Math_Monkeys
             }
             }
         }
+       
         //set the current date in login form 
         public void timer1_Tick(object sender, EventArgs e)
         {
@@ -92,6 +103,7 @@ namespace Math_Monkeys
             this.lblTodayDate.Text += DateTime.Now.ToShortTimeString();
 
         }
+
         //Fill out the dropDown list with user accessible to this application
         public void updateDdlist()
         {

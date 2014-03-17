@@ -97,5 +97,26 @@ namespace Math_Monkeys.Properties {
                 return ((string)(this["mmFolder"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public uint DefaltAdminID {
+            get {
+                return ((uint)(this["DefaltAdminID"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("admin")]
+        public string DefaltAdminName {
+            get {
+                return ((string)(this["DefaltAdminName"]));
+            }
+            set {
+                this["DefaltAdminName"] = value;
+            }
+        }
     }
 }

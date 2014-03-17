@@ -13,73 +13,128 @@ namespace Math_Monkeys.Classes
 {
     class FileHandler
     {
-        private string filePath;
+        #region Member Variables
 
-        private void init()
-        {
-            filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Properties.Settings.Default.mmFolder);
+            private string filePath;
+            private enum MMFileType {None, User, ProblemSet, Assignment, AssignmentAttempt};
+        
+        #endregion
 
-            if (!Directory.Exists(filePath))
-            {
-                Directory.CreateDirectory(filePath);
-            }
+        #region FileHandler Methods
 
-        }
-
-        private XDocument OpenFile(string fileName)
+            private XDocument OpenFile(string fileName, MMFileType fileType)
         {
             if (!File.Exists(fileName))
             {
-                throw new FileNotFoundException("Open File failed. The file does not exists", fileName);
+                XDocument xFile = new XDocument( );
+               
+
+                switch (fileType)
+                {
+  
+                    case MMFileType.User:
+                                    xFile.Add(
+                                        new XElement("users", 
+                                            new XElement("user",
+                                                new XElement("id", Properties.Settings.Default.DefaltAdminID),
+                                                new XElement("type", UserType.Administrator),
+                                                new XElement("screenname", Properties.Settings.Default.DefaltAdminName),
+                                                new XElement("name",
+                                                    new XElement("first", Properties.Settings.Default.DefaltAdminName),
+                                                    new XElement("last", Properties.Settings.Default.DefaltAdminName)
+                                                ),
+                                                new XElement("password",Properties.Settings.Default.DefaltAdminName),
+                                                new XElement("loginrecords",
+                                                    new XElement("login",
+                                                        new XElement("date", DateTime.Now),
+                                                        new XElement("duration", string.Empty)
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    );
+                        break;
+                    case MMFileType.ProblemSet:
+                        xFile.Add(new XElement("problemSets", string.Empty));
+                        break;
+                    case MMFileType.Assignment:
+                        xFile.Add(new XElement("assignments", string.Empty));
+                        break;
+                    case MMFileType.AssignmentAttempt:
+                        xFile.Add(new XElement("assignmentAttempts", string.Empty));
+                        break;
+                    case MMFileType.None:
+                    default:
+                        break;
+
+                }
+
+                xFile.Save(fileName);
+                
             }
-            else
+           
+            try
             {
-                try
+                return XDocument.Load(fileName);
+            }
+            catch (System.IO.IOException ex)
+            {
+                System.Diagnostics.Debug.Write(ex.Message);
+                return null;
+            }
+
+        }
+        
+        #endregion
+
+        #region constructors
+
+            private void init()
+            {
+                filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Properties.Settings.Default.mmFolder);
+
+                if (!Directory.Exists(filePath))
                 {
-                    return XDocument.Load(fileName);
-                }
-                catch (System.IO.IOException ex)
-                {
-                    System.Diagnostics.Debug.Write(ex.Message);
-                    return null;
+                    Directory.CreateDirectory(filePath);
                 }
 
             }
-        }
 
-        public FileHandler()
+            public FileHandler()
         {
             init();
         }
+        
+        #endregion
 
-        public User GetUserByID(uint id)
-        {
-            var users = from user in GetAllUsers()
-                           where user.ID == id
-                           select user;
-            List<User> userList = new List<User>(users);
-            return userList.Count > 0 ? userList[0]: null;
-        }
+        #region User Methods
 
-        public List<User> GetUserList(UserType userType)
-        {
-            var userList = from user in GetAllUsers()
-                    where user.UserType == userType
-                    select user;
-            return new List<User>(userList);
-        }
-
-        public List<User> GetAllUsers()
-        {
-            List<User> userList = new List<User>();
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.usersFilename);
-            XDocument usersDocument;
-
-            if (File.Exists(fileName))
+            public User GetUserByID(uint id)
             {
+                var users = from user in GetAllUsers()
+                               where user.ID == id
+                               select user;
+                List<User> userList = new List<User>(users);
+                return userList.Count > 0 ? userList[0]: null;
+            }
+
+            public List<User> GetUserList(UserType userType)
+            {
+                var userList = from user in GetAllUsers()
+                        where user.UserType == userType
+                        select user;
+                return new List<User>(userList);
+            }
+
+            public List<User> GetAllUsers()
+            {
+                List<User> userList = new List<User>();
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.usersFilename);
+                XDocument usersDocument;
+                               
                 try
                 {
-                    usersDocument = OpenFile(fileName);
+                    usersDocument = OpenFile(fileName, MMFileType.User);
                     
                     userList = usersDocument.Descendants("user").Select( d =>
                                     new User
@@ -98,129 +153,131 @@ namespace Math_Monkeys.Classes
                 {
                     System.Diagnostics.Debug.Write(ex.Message);
                 }
+             
+
+                return userList;
             }
 
-            return userList;
-        }
-
-        public void SaveNewUser(User user)
-        {
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.usersFilename);
+            public void SaveNewUser(User user)
+            {
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.usersFilename);
                       
-            try
-            {
-                XDocument userFile = OpenFile(fileName);
-
-                if (userFile != null)
+                try
                 {
-                    var newUserNode = new XElement("user",
-                        new XElement("id", user.ID),
-                        new XElement("type", user.UserType),
-                        new XElement("screenname", user.ScreenName),
-                        new XElement("name",
-                            new XElement("first", user.FirstName),
-                            new XElement("last", user.LastName)),
-                        new XElement("password", user.Password),
-                        new XElement("loginrecords",
-                            new XElement("login",
-                                new XElement("date", user.LastLoginDate),
-                                new XElement("duration", string.Empty)
-                                        )
-                                    )
-                    );
+                    XDocument userFile = OpenFile(fileName, MMFileType.User);
 
-                    userFile.Element("users").Add(newUserNode);
-                    userFile.Save(fileName);
-                }
-            }
-            catch ( FileNotFoundException ex)
-            {
-                System.Diagnostics.Debug.Write(ex.Message);
-            }
-            
-        }
-
-        public void UpdateUser(User user)
-        { 
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.usersFilename);
-
-            try
-            {
-                XDocument userFile = OpenFile(fileName);
-
-                if (userFile != null)
-                {
-                    var users = from elem in userFile.Descendants("user")
-                                where user.ID == uint.Parse(elem.Element("id").Value)
-                                select elem;
-
-                    foreach (XElement item in users)
-                    {
-                        item.SetElementValue("type", user.UserType.ToString());
-                        item.SetElementValue("screenname", user.ScreenName);
-                        item.Element("name").SetElementValue("first", user.FirstName);
-                        item.Element("name").SetElementValue("last", user.LastName);
-                        item.SetElementValue("password", user.Password);
-                        item.Element("loginrecords").Element("login").SetElementValue("date", user.LastLoginDate.Value);
-                    }
-                }  
                 
-            }
-            catch (FileNotFoundException ex)
-            {
-                System.Diagnostics.Debug.Write(ex.Message);
-            }
-        }
-
-        public void DeleteUser(User user)
-        {
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.usersFilename);
-            try
-            {
-                XDocument userFile = OpenFile(fileName);
-
-                if (userFile != null)
-                {
-                    var users = from elem in userFile.Descendants("user")
-                                where user.ID == uint.Parse(elem.Element("id").Value)
-                                select elem;
-
-                    foreach (XElement item in users)
+                    if (userFile != null)
                     {
-                        item.Remove();
+                        var newUserNode = new XElement("user",
+                            new XElement("id", user.ID),
+                            new XElement("type", user.UserType),
+                            new XElement("screenname", user.ScreenName),
+                            new XElement("name",
+                                new XElement("first", user.FirstName),
+                                new XElement("last", user.LastName)),
+                            new XElement("password", user.Password),
+                            new XElement("loginrecords",
+                                new XElement("login",
+                                    new XElement("date", user.LastLoginDate),
+                                    new XElement("duration", string.Empty)
+                                            )
+                                        )
+                        );
+
+                        userFile.Element("users").Add(newUserNode);
+                        userFile.Save(fileName);
                     }
-
-                    userFile.Save(fileName);
                 }
-
+                catch ( FileNotFoundException ex)
+                {
+                    System.Diagnostics.Debug.Write(ex.Message);
+                }
+            
             }
-            catch (FileNotFoundException ex)
-            {
-                System.Diagnostics.Debug.Write(ex.Message);
-            }
-        }
 
-        public Assignment GetAssignmentByID(uint id)
-        {
-            var assignments = from assign in GetAllAssignments()
-                              where assign.ID == id
-                              select assign;
-            List<Assignment> assignmentsList = new List<Assignment>(assignments);
-            return assignmentsList.Count > 0 ? assignmentsList[0] : null;
-        }
-
-        public List<Assignment> GetAllAssignments()
-        { 
-            List<Assignment> assignmentList = new List<Assignment>();
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentFilename);
-            XDocument usersDocument;
-
-            if (File.Exists(fileName))
-            {
+            public void UpdateUser(User user)
+            { 
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.usersFilename);
 
                 try
                 {
-                    usersDocument = OpenFile(fileName);
+                    XDocument userFile = OpenFile(fileName, MMFileType.User);
+
+                    if (userFile != null)
+                    {
+                        var users = from elem in userFile.Descendants("user")
+                                    where user.ID == uint.Parse(elem.Element("id").Value)
+                                    select elem;
+
+                        foreach (XElement item in users)
+                        {
+                            item.SetElementValue("type", user.UserType.ToString());
+                            item.SetElementValue("screenname", user.ScreenName);
+                            item.Element("name").SetElementValue("first", user.FirstName);
+                            item.Element("name").SetElementValue("last", user.LastName);
+                            item.SetElementValue("password", user.Password);
+                            item.Element("loginrecords").Element("login").SetElementValue("date", user.LastLoginDate.Value);
+                        }
+                    }  
+                
+                }
+                catch (FileNotFoundException ex)
+                {
+                    System.Diagnostics.Debug.Write(ex.Message);
+                }
+            }
+
+            public void DeleteUser(User user)
+            {
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.usersFilename);
+                try
+                {
+                    XDocument userFile = OpenFile(fileName, MMFileType.User);
+
+                    if (userFile != null)
+                    {
+                        var users = from elem in userFile.Descendants("user")
+                                    where user.ID == uint.Parse(elem.Element("id").Value)
+                                    select elem;
+
+                        foreach (XElement item in users)
+                        {
+                            item.Remove();
+                        }
+
+                        userFile.Save(fileName);
+                    }
+
+                }
+                catch (FileNotFoundException ex)
+                {
+                    System.Diagnostics.Debug.Write(ex.Message);
+                }
+            }
+
+        #endregion
+
+        #region Assignment Methods
+
+            public Assignment GetAssignmentByID(uint id)
+            {
+                var assignments = from assign in GetAllAssignments()
+                                  where assign.ID == id
+                                  select assign;
+                List<Assignment> assignmentsList = new List<Assignment>(assignments);
+                return assignmentsList.Count > 0 ? assignmentsList[0] : null;
+            }
+
+            public List<Assignment> GetAllAssignments()
+            { 
+                List<Assignment> assignmentList = new List<Assignment>();
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentFilename);
+                XDocument usersDocument;
+
+                try
+                {
+                    usersDocument = OpenFile(fileName, MMFileType.Assignment);
 
                     assignmentList = usersDocument.Descendants("assignment").Select(d =>
                                     new Assignment
@@ -236,126 +293,128 @@ namespace Math_Monkeys.Classes
                 {
                     System.Diagnostics.Debug.Write(ex.Message);
                 }
+                
+
+                return assignmentList;
             }
 
-            return assignmentList;
-        }
-
-        public List<Assignment> GetAssignmentsByUser(User user)
-        {
-            var assignments = from assign in GetAllAssignments()
-                              where assign.UserID == user.ID
-                              select assign;
-            return new List<Assignment>(assignments);
-        }
-
-        public List<Assignment> GetAssignmentsByProblemSet(ProblemSet problemSet)
-        {
-            var assignments = from assign in GetAllAssignments()
-                              where assign.ProblemSetID == problemSet.ID
-                              select assign;
-            return new List<Assignment>(assignments);
-        }
-
-        public void SaveNewAssignment(Assignment assignment)
-        {
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentFilename);
-
-            try
+            public List<Assignment> GetAssignmentsByUser(User user)
             {
-                XDocument assignmentFile = OpenFile(fileName);
-
-                if (assignmentFile != null)
-                {
-                    var newAssignmentNode = new XElement("assignment",
-                        new XElement("id", assignment.ID),
-                        new XElement("userID", assignment.UserID),
-                        new XElement("problemSetID", assignment.ProblemSetID),
-                        new XElement("goal", assignment.Goal)
-                        );
-                    assignmentFile.Element("assignments").Add(newAssignmentNode);
-                    assignmentFile.Save(fileName);
-                }
+                var assignments = from assign in GetAllAssignments()
+                                  where assign.UserID == user.ID
+                                  select assign;
+                return new List<Assignment>(assignments);
             }
-            catch (FileNotFoundException ex)
+
+            public List<Assignment> GetAssignmentsByProblemSet(ProblemSet problemSet)
             {
-                System.Diagnostics.Debug.Write(ex.Message);
+                var assignments = from assign in GetAllAssignments()
+                                  where assign.ProblemSetID == problemSet.ID
+                                  select assign;
+                return new List<Assignment>(assignments);
             }
-        }
 
-        public void UpdateAssignment(Assignment assignment)
-        {
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentFilename);
-
-            try
+            public void SaveNewAssignment(Assignment assignment)
             {
-                XDocument assignmentFile = OpenFile(fileName);
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentFilename);
 
-                if (assignmentFile != null)
-                {
-                    var assignments = from elem in assignmentFile.Descendants("assignment")
-                                      where assignment.ID == uint.Parse(elem.Element("id").Value)
-                                select elem;
-
-                    foreach (XElement item in assignments)
-                    {
-                        item.SetElementValue("userID", assignment.UserID.ToString());
-                        item.SetElementValue("problemSetID", assignment.ProblemSetID.ToString());
-                        item.SetElementValue("goal", assignment.Goal.ToString());
-                    }
-
-                    assignmentFile.Save(fileName);
-                }
-
-            }
-            catch (FileNotFoundException ex)
-            {
-                System.Diagnostics.Debug.Write(ex.Message);
-            }
-        
-        }
-
-        public void DeleteAssignment(Assignment assignment)
-        {
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentFilename);
-            try
-            {
-                XDocument assignmentFile = OpenFile(fileName);
-
-                if (assignmentFile != null)
-                {
-                    var assignments = from elem in assignmentFile.Descendants("assignment")
-                                where assignment.ID == uint.Parse(elem.Element("id").Value)
-                                select elem;
-
-                    foreach (XElement item in assignments)
-                    {
-                        item.Remove();
-                    }
-
-                    assignmentFile.Save(fileName);
-                }
-
-            }
-            catch (FileNotFoundException ex)
-            {
-                System.Diagnostics.Debug.Write(ex.Message);
-            }
-        }
-
-        public List<ProblemSet> GetAllProblemSets()
-        {
-
-            List<ProblemSet> problemSetsList = new List<ProblemSet>();
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.problemSetsFilename);
-            XDocument problemSetsDocument;
-
-            if (File.Exists(fileName))
-            {
                 try
                 {
-                  
-                    problemSetsDocument = OpenFile(fileName);
+                    XDocument assignmentFile = OpenFile(fileName, MMFileType.Assignment);
+
+                    if (assignmentFile != null)
+                    {
+                        var newAssignmentNode = new XElement("assignment",
+                            new XElement("id", assignment.ID),
+                            new XElement("userID", assignment.UserID),
+                            new XElement("problemSetID", assignment.ProblemSetID),
+                            new XElement("goal", assignment.Goal)
+                            );
+                        assignmentFile.Element("assignments").Add(newAssignmentNode);
+                        assignmentFile.Save(fileName);
+                    }
+                }
+                catch (FileNotFoundException ex)
+                {
+                    System.Diagnostics.Debug.Write(ex.Message);
+                }
+            }
+
+            public void UpdateAssignment(Assignment assignment)
+            {
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentFilename);
+
+                try
+                {
+                    XDocument assignmentFile = OpenFile(fileName, MMFileType.Assignment);
+
+                    if (assignmentFile != null)
+                    {
+                        var assignments = from elem in assignmentFile.Descendants("assignment")
+                                          where assignment.ID == uint.Parse(elem.Element("id").Value)
+                                    select elem;
+
+                        foreach (XElement item in assignments)
+                        {
+                            item.SetElementValue("userID", assignment.UserID.ToString());
+                            item.SetElementValue("problemSetID", assignment.ProblemSetID.ToString());
+                            item.SetElementValue("goal", assignment.Goal.ToString());
+                        }
+
+                        assignmentFile.Save(fileName);
+                    }
+
+                }
+                catch (FileNotFoundException ex)
+                {
+                    System.Diagnostics.Debug.Write(ex.Message);
+                }
+        
+            }
+
+            public void DeleteAssignment(Assignment assignment)
+            {
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentFilename);
+                try
+                {
+                    XDocument assignmentFile = OpenFile(fileName, MMFileType.Assignment);
+
+                    if (assignmentFile != null)
+                    {
+                        var assignments = from elem in assignmentFile.Descendants("assignment")
+                                    where assignment.ID == uint.Parse(elem.Element("id").Value)
+                                    select elem;
+
+                        foreach (XElement item in assignments)
+                        {
+                            item.Remove();
+                        }
+
+                        assignmentFile.Save(fileName);
+                    }
+
+                }
+                catch (FileNotFoundException ex)
+                {
+                    System.Diagnostics.Debug.Write(ex.Message);
+                }
+            }
+
+        #endregion
+
+        #region ProblemSet Methods
+
+            public List<ProblemSet> GetAllProblemSets()
+            {
+
+                List<ProblemSet> problemSetsList = new List<ProblemSet>();
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.problemSetsFilename);
+                XDocument problemSetsDocument;
+
+                try
+                {
+
+                    problemSetsDocument = OpenFile(fileName, MMFileType.ProblemSet);
 
                     problemSetsList = problemSetsDocument.Descendants("problemSet").Select(d =>
                                     new ProblemSet
@@ -377,265 +436,270 @@ namespace Math_Monkeys.Classes
                 {
                     System.Diagnostics.Debug.Write(ex.Message);
                 }
+                
+                return problemSetsList;
             }
 
-            return problemSetsList;
-        }
+            public ProblemSet GetProblemSetByID(uint id)
+            {
+                var problemsSets = from problemSet in GetAllProblemSets()
+                                   where problemSet.ID == id
+                                   select problemSet;
+                List<ProblemSet> ProblemSetList = new List<ProblemSet>(problemsSets);
+                return ProblemSetList.Count > 0 ? ProblemSetList[0] : null;
+            }
 
-        public ProblemSet GetProblemSetByID(uint id)
-        {
-            var problemsSets = from problemSet in GetAllProblemSets()
-                               where problemSet.ID == id
+            public List<ProblemSet> GetProblemSetByOperation(Operation operation)
+            {
+
+                var ProblemSetList = from problemSet in GetAllProblemSets()
+                               where problemSet.Operation == operation
                                select problemSet;
-            List<ProblemSet> ProblemSetList = new List<ProblemSet>(problemsSets);
-            return ProblemSetList.Count > 0 ? ProblemSetList[0] : null;
-        }
-
-        public List<ProblemSet> GetProblemSetByOperation(Operation operation)
-        {
-
-            var ProblemSetList = from problemSet in GetAllProblemSets()
-                           where problemSet.Operation == operation
-                           select problemSet;
-            return new List<ProblemSet>(ProblemSetList);
-        }
-
-        public void SaveNewProblemSet(ProblemSet problemSet)
-        {
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.problemSetsFilename);
-
-            try
-            {
-                XDocument problemSetFile = OpenFile(fileName);
-
-                if (problemSetFile != null)
-                {
-                   var newproblemSetFileNode = new XElement("problemSet",
-                        new XElement("id", problemSet.ID),
-                        new XElement("name", problemSet.Name),
-                        new XElement("operation", problemSet.Operation),
-                        new XElement("operands", problemSet.Operand)
-                        );
-
-                    problemSetFile.Element("problemSets").Add(newproblemSetFileNode);
-                    problemSetFile.Save(fileName);
-                }
+                return new List<ProblemSet>(ProblemSetList);
             }
-            catch (FileNotFoundException ex)
+
+            public void SaveNewProblemSet(ProblemSet problemSet)
             {
-                System.Diagnostics.Debug.Write(ex.Message);
-            }
-            
-        }
-
-        public void UpdateProblemSet(ProblemSet problemSet)
-        {
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.problemSetsFilename);
-
-            try
-            {
-                XDocument problemSetFile = OpenFile(fileName);
-
-                if (problemSetFile != null)
-                {
-                    var problemSets = from elem in problemSetFile.Descendants("problemSet")
-                                      where problemSet.ID == uint.Parse(elem.Element("id").Value)
-                                      select elem;
-
-                    foreach (XElement item in problemSets)
-                    {
-                        item.SetElementValue("name", problemSet.Name);
-                        item.SetElementValue("operation", problemSet.Operation);
-                        item.SetElementValue("operands", problemSet.Operand);
-                        item.SetElementValue("numberOfProblems", problemSet.NumberOfProblems);
-                    }
-
-                    problemSetFile.Save(fileName);
-                }
-
-            }
-            catch (FileNotFoundException ex)
-            {
-                System.Diagnostics.Debug.Write(ex.Message);
-            }
-        }
-
-        public void DeleteProblemSet(ProblemSet problemSet)
-        {
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.problemSetsFilename);
-            try
-            {
-                XDocument problemSetFile = OpenFile(fileName);
-
-                if (problemSetFile != null)
-                {
-                    var problemSets = from elem in problemSetFile.Descendants("problemSet")
-                                      where problemSet.ID == uint.Parse(elem.Element("id").Value)
-                                      select elem;
-
-                    foreach (XElement item in problemSets)
-                    {
-                        item.Remove();
-                    }
-
-                    problemSetFile.Save(fileName);
-                }
-
-            }
-            catch (FileNotFoundException ex)
-            {
-                System.Diagnostics.Debug.Write(ex.Message);
-            }
-        }
-
-        public List<AssignmentAttempt> GetAllAssignmentAttempts()
-        {
-            List<AssignmentAttempt> assignmentAttempsList = new List<AssignmentAttempt>();
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentAttempsFilename);
-            XDocument assignmentAttempsDocument;
-
-            if (File.Exists(fileName))
-            {
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.problemSetsFilename);
 
                 try
                 {
-                    assignmentAttempsDocument = OpenFile(fileName);
+                    XDocument problemSetFile = OpenFile(fileName, MMFileType.ProblemSet);
 
-                    assignmentAttempsList = assignmentAttempsDocument.Descendants("assignmentAttemps").Select(d =>
-                                    new AssignmentAttempt
-                                    {
-                                        ID = uint.Parse(d.Element("id").Value),
-                                        AssignmentID = uint.Parse(d.Element("assignmentID").Value),
-                                        Date = DateTime.Parse(d.Element("date").Value),
-                                        Grade = Double.Parse(d.Element("grade").Value),
-                                        TimeSpent = TimeSpan.Parse(d.Element("timeSpent").Value)
-                                    }
-                                ).ToList();
+                    if (problemSetFile != null)
+                    {
+                       var newproblemSetFileNode = new XElement("problemSet",
+                            new XElement("id", problemSet.ID),
+                            new XElement("name", problemSet.Name),
+                            new XElement("operation", problemSet.Operation),
+                            new XElement("operands", problemSet.Operand)
+                            );
+
+                        problemSetFile.Element("problemSets").Add(newproblemSetFileNode);
+                        problemSetFile.Save(fileName);
+                    }
                 }
-                catch (System.ArgumentOutOfRangeException ex)
+                catch (FileNotFoundException ex)
+                {
+                    System.Diagnostics.Debug.Write(ex.Message);
+                }
+            
+            }
+
+            public void UpdateProblemSet(ProblemSet problemSet)
+            {
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.problemSetsFilename);
+
+                try
+                {
+                    XDocument problemSetFile = OpenFile(fileName, MMFileType.ProblemSet);
+
+                    if (problemSetFile != null)
+                    {
+                        var problemSets = from elem in problemSetFile.Descendants("problemSet")
+                                          where problemSet.ID == uint.Parse(elem.Element("id").Value)
+                                          select elem;
+
+                        foreach (XElement item in problemSets)
+                        {
+                            item.SetElementValue("name", problemSet.Name);
+                            item.SetElementValue("operation", problemSet.Operation);
+                            item.SetElementValue("operands", problemSet.Operand);
+                            item.SetElementValue("numberOfProblems", problemSet.NumberOfProblems);
+                        }
+
+                        problemSetFile.Save(fileName);
+                    }
+
+                }
+                catch (FileNotFoundException ex)
                 {
                     System.Diagnostics.Debug.Write(ex.Message);
                 }
             }
 
-            return assignmentAttempsList;
-        }
-
-        public AssignmentAttempt GetAssignmentAttemptByID(uint id)
-        {
-            var assignmentAttempts = from assignmentAttempt in GetAllAssignmentAttempts()
-                                     where assignmentAttempt.ID == id
-                                     select assignmentAttempt;
-            List<AssignmentAttempt> assignmentAttemptList = new List<AssignmentAttempt>(assignmentAttempts);
-            return assignmentAttemptList.Count > 0 ? assignmentAttemptList[0] : null;
-        }
-
-        public List<AssignmentAttempt> GetAssignmentAttemptsByAssignmentID(uint id)
-        {
-            var assignmentAttempts = from assignmentAttempt in GetAllAssignmentAttempts()
-                                     where assignmentAttempt.AssignmentID == id
-                                     select assignmentAttempt;
-
-            return  new List<AssignmentAttempt>(assignmentAttempts);
-        }
-
-        public List<AssignmentAttempt> GetAssignmentAttemptsByDateRange(DateTime startDate, DateTime endDate)
-        {
-            var assignmentAttempts = from assignmentAttempt in GetAllAssignmentAttempts()
-                                     where assignmentAttempt.Date >= startDate
-                                        && assignmentAttempt.Date <= endDate
-                                     select assignmentAttempt;
-
-            return new List<AssignmentAttempt>(assignmentAttempts);
-        }
-
-        public void SaveNewAssignmentAttempt(AssignmentAttempt assignmentAttempt)
-        {
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentAttempsFilename);
-
-            try
+            public void DeleteProblemSet(ProblemSet problemSet)
             {
-                XDocument assignmentAttemptFile = OpenFile(fileName);
-
-                if (assignmentAttemptFile != null)
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.problemSetsFilename);
+                try
                 {
-                    var newAssignmentAttemptFileNode = new XElement("assignmentAttempt",
-                         new XElement("id", assignmentAttempt.ID),
-                         new XElement("assignmentID", assignmentAttempt.AssignmentID),
-                         new XElement("date", assignmentAttempt.Date),
-                         new XElement("grade", assignmentAttempt.Date),
-                         new XElement("timeSpent", assignmentAttempt.Date)
-                         );
+                    XDocument problemSetFile = OpenFile(fileName, MMFileType.ProblemSet);
 
-                    assignmentAttemptFile.Element("assignmentAttempts").Add(newAssignmentAttemptFileNode);
-                    assignmentAttemptFile.Save(fileName);
+                    if (problemSetFile != null)
+                    {
+                        var problemSets = from elem in problemSetFile.Descendants("problemSet")
+                                          where problemSet.ID == uint.Parse(elem.Element("id").Value)
+                                          select elem;
+
+                        foreach (XElement item in problemSets)
+                        {
+                            item.Remove();
+                        }
+
+                        problemSetFile.Save(fileName);
+                    }
+
+                }
+                catch (FileNotFoundException ex)
+                {
+                    System.Diagnostics.Debug.Write(ex.Message);
                 }
             }
-            catch (FileNotFoundException ex)
+
+        #endregion
+
+        #region AssignmentAttempt Methods
+
+            public List<AssignmentAttempt> GetAllAssignmentAttempts()
             {
-                System.Diagnostics.Debug.Write(ex.Message);
+                List<AssignmentAttempt> assignmentAttempsList = new List<AssignmentAttempt>();
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentAttempsFilename);
+                XDocument assignmentAttempsDocument;
+
+                if (File.Exists(fileName))
+                {
+
+                    try
+                    {
+                        assignmentAttempsDocument = OpenFile(fileName, MMFileType.AssignmentAttempt);
+
+                        assignmentAttempsList = assignmentAttempsDocument.Descendants("assignmentAttemps").Select(d =>
+                                        new AssignmentAttempt
+                                        {
+                                            ID = uint.Parse(d.Element("id").Value),
+                                            AssignmentID = uint.Parse(d.Element("assignmentID").Value),
+                                            Date = DateTime.Parse(d.Element("date").Value),
+                                            Grade = Double.Parse(d.Element("grade").Value),
+                                            TimeSpent = TimeSpan.Parse(d.Element("timeSpent").Value)
+                                        }
+                                    ).ToList();
+                    }
+                    catch (System.ArgumentOutOfRangeException ex)
+                    {
+                        System.Diagnostics.Debug.Write(ex.Message);
+                    }
+                }
+
+                return assignmentAttempsList;
             }
+
+            public AssignmentAttempt GetAssignmentAttemptByID(uint id)
+            {
+                var assignmentAttempts = from assignmentAttempt in GetAllAssignmentAttempts()
+                                         where assignmentAttempt.ID == id
+                                         select assignmentAttempt;
+                List<AssignmentAttempt> assignmentAttemptList = new List<AssignmentAttempt>(assignmentAttempts);
+                return assignmentAttemptList.Count > 0 ? assignmentAttemptList[0] : null;
+            }
+
+            public List<AssignmentAttempt> GetAssignmentAttemptsByAssignmentID(uint id)
+            {
+                var assignmentAttempts = from assignmentAttempt in GetAllAssignmentAttempts()
+                                         where assignmentAttempt.AssignmentID == id
+                                         select assignmentAttempt;
+
+                return  new List<AssignmentAttempt>(assignmentAttempts);
+            }
+
+            public List<AssignmentAttempt> GetAssignmentAttemptsByDateRange(DateTime startDate, DateTime endDate)
+            {
+                var assignmentAttempts = from assignmentAttempt in GetAllAssignmentAttempts()
+                                         where assignmentAttempt.Date >= startDate
+                                            && assignmentAttempt.Date <= endDate
+                                         select assignmentAttempt;
+
+                return new List<AssignmentAttempt>(assignmentAttempts);
+            }
+
+            public void SaveNewAssignmentAttempt(AssignmentAttempt assignmentAttempt)
+            {
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentAttempsFilename);
+
+                try
+                {
+                    XDocument assignmentAttemptFile = OpenFile(fileName, MMFileType.AssignmentAttempt);
+
+                    if (assignmentAttemptFile != null)
+                    {
+                        var newAssignmentAttemptFileNode = new XElement("assignmentAttempt",
+                             new XElement("id", assignmentAttempt.ID),
+                             new XElement("assignmentID", assignmentAttempt.AssignmentID),
+                             new XElement("date", assignmentAttempt.Date),
+                             new XElement("grade", assignmentAttempt.Date),
+                             new XElement("timeSpent", assignmentAttempt.Date)
+                             );
+
+                        assignmentAttemptFile.Element("assignmentAttempts").Add(newAssignmentAttemptFileNode);
+                        assignmentAttemptFile.Save(fileName);
+                    }
+                }
+                catch (FileNotFoundException ex)
+                {
+                    System.Diagnostics.Debug.Write(ex.Message);
+                }
             
-        }
+            }
 
-        public void UpdateAssignmentAttempt(AssignmentAttempt assignmentAttempt)
-        {
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentAttempsFilename);
-
-            try
+            public void UpdateAssignmentAttempt(AssignmentAttempt assignmentAttempt)
             {
-                XDocument assignmentAttemptFile = OpenFile(fileName);
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentAttempsFilename);
 
-                if (assignmentAttemptFile != null)
+                try
                 {
-                    var assignmentAttempts = from elem in assignmentAttemptFile.Descendants("assignmentAttempt")
-                                      where assignmentAttempt.ID == uint.Parse(elem.Element("id").Value)
-                                      select elem;
+                    XDocument assignmentAttemptFile = OpenFile(fileName, MMFileType.AssignmentAttempt);
 
-                    foreach (XElement item in assignmentAttempts)
+                    if (assignmentAttemptFile != null)
                     {
-                        item.SetElementValue("AssignmentID", assignmentAttempt.AssignmentID);
-                        item.SetElementValue("Date", assignmentAttempt.Date);
-                        item.SetElementValue("grade", assignmentAttempt.Grade);
-                        item.SetElementValue("timeSpent", assignmentAttempt.TimeSpent);
+                        var assignmentAttempts = from elem in assignmentAttemptFile.Descendants("assignmentAttempt")
+                                          where assignmentAttempt.ID == uint.Parse(elem.Element("id").Value)
+                                          select elem;
+
+                        foreach (XElement item in assignmentAttempts)
+                        {
+                            item.SetElementValue("AssignmentID", assignmentAttempt.AssignmentID);
+                            item.SetElementValue("Date", assignmentAttempt.Date);
+                            item.SetElementValue("grade", assignmentAttempt.Grade);
+                            item.SetElementValue("timeSpent", assignmentAttempt.TimeSpent);
+                        }
+
+                        assignmentAttemptFile.Save(fileName);
                     }
 
-                    assignmentAttemptFile.Save(fileName);
                 }
-
-            }
-            catch (FileNotFoundException ex)
-            {
-                System.Diagnostics.Debug.Write(ex.Message);
-            }
-        }
-
-        public void DeleteAssignmentAttempt(AssignmentAttempt assignmentAttempt)
-        {
-            string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentAttempsFilename);
-            try
-            {
-                XDocument assignmentAttemptFile = OpenFile(fileName);
-
-                if (assignmentAttemptFile != null)
+                catch (FileNotFoundException ex)
                 {
-                    var assignmentAttempts = from elem in assignmentAttemptFile.Descendants("assignmentAttempt")
-                                      where assignmentAttempt.ID == uint.Parse(elem.Element("id").Value)
-                                      select elem;
+                    System.Diagnostics.Debug.Write(ex.Message);
+                }
+            }
 
-                    foreach (XElement item in assignmentAttempts)
+            public void DeleteAssignmentAttempt(AssignmentAttempt assignmentAttempt)
+            {
+                string fileName = Path.Combine(filePath, Properties.Settings.Default.assignmentAttempsFilename);
+                try
+                {
+                    XDocument assignmentAttemptFile = OpenFile(fileName, MMFileType.AssignmentAttempt);
+
+                    if (assignmentAttemptFile != null)
                     {
-                        item.Remove();
+                        var assignmentAttempts = from elem in assignmentAttemptFile.Descendants("assignmentAttempt")
+                                          where assignmentAttempt.ID == uint.Parse(elem.Element("id").Value)
+                                          select elem;
+
+                        foreach (XElement item in assignmentAttempts)
+                        {
+                            item.Remove();
+                        }
+
+                        assignmentAttemptFile.Save(fileName);
                     }
 
-                    assignmentAttemptFile.Save(fileName);
                 }
+                catch (FileNotFoundException ex)
+                {
+                    System.Diagnostics.Debug.Write(ex.Message);
+                }
+            }
 
-            }
-            catch (FileNotFoundException ex)
-            {
-                System.Diagnostics.Debug.Write(ex.Message);
-            }
-        }
+        #endregion
     }
 }
