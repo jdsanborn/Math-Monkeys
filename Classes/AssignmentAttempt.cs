@@ -12,15 +12,15 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace Math_Monkeys.Classes
+namespace Math_Monkeys
 {
      [XmlType("assignmentAttempt")]
     class AssignmentAttempt
     {
         #region member variables
 
-        private uint id;
-        private uint assignmentID;
+        private string id;
+        private string assignmentID;
         private DateTime? date;
         private double grade;
         private TimeSpan timeSpent;
@@ -30,7 +30,7 @@ namespace Math_Monkeys.Classes
         #region properties
 
         [XmlElement("id")]
-        public uint ID
+        public string ID
         {
             get
             {
@@ -43,7 +43,7 @@ namespace Math_Monkeys.Classes
         }
 
         [XmlElement("assignmentID")]
-        public uint AssignmentID
+        public string AssignmentID
         {
             get
             {
@@ -120,8 +120,8 @@ namespace Math_Monkeys.Classes
 
         private void init()
         {
-            this.ID = 0;
-            this.AssignmentID = 0;
+            this.ID = string.Empty;
+            this.AssignmentID = string.Empty;
             this.Date = DateTime.MinValue;
             this.Grade = 0.0;
             this.TimeSpent = TimeSpan.Zero;
@@ -135,7 +135,7 @@ namespace Math_Monkeys.Classes
 
         }
 
-        public AssignmentAttempt(uint id, uint assignmentID, DateTime? date, double grade, TimeSpan timeSpent)
+        public AssignmentAttempt(string id, string assignmentID, DateTime? date, double grade, TimeSpan timeSpent)
         {
             init();
 

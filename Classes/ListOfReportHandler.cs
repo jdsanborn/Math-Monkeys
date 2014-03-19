@@ -153,7 +153,7 @@ namespace Math_Monkeys
 
 
         //Update file will be called after a student have completed a fiel certain fields wil be updated. 
-        public void UpdateReport(User student, double grade, Jungle jungle, Report report) // Adds just a student for now with  uniqueID=count and some userName
+        public void UpdateReport(User student, double grade, Report report) //  Jungle jungle,  //Adds just a student for now with  uniqueID=count and some userName
         {
             //System.Diagnostics.Debug.Write("Grade is handler " + grade);
             string today;
@@ -171,7 +171,7 @@ namespace Math_Monkeys
                 foreach (XElement itemE in query)
                 {
                     //System.Diagnostics.Debug.Write("An item was selected");
-                    itemE.SetElementValue("JungleName", jungle.JungleName);
+                    //itemE.SetElementValue("JungleName", jungle.JungleName);
                     itemE.SetElementValue("AssignmentComplete", true);
                     itemE.SetElementValue("DateComplete", today);
                     itemE.SetElementValue("Grade", Math.Round(grade, 2));

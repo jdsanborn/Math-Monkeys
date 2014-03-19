@@ -7,5 +7,6 @@ namespace Math_Monkeys
 {
     class UnsafeUserValidator //: UserValidator
     {
+
     }
 }

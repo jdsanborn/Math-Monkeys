@@ -23,9 +23,13 @@
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>3</ApplicationRevision>
-    <ApplicationVersion>2.0.1.%2a</ApplicationVersion>
+    <MapFileExtensions>false</MapFileExtensions>
+    <TargetCulture>en</TargetCulture>
+    <ProductName>Math Monkeys</ProductName>
+    <PublisherName>The Code Monkeys</PublisherName>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>7</ApplicationRevision>
+    <ApplicationVersion>2.1.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -50,7 +54,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>5670CC65A5DBF3B3180CA506B64BC8F6B116B823</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>695E0841EB7DA45745AC0534CDD02D3DBBEA381B</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>
@@ -71,6 +75,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\Math Monkeys Logo 2.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -96,12 +103,12 @@
     <Compile Include="Forms\AddNewProblemSet.Designer.cs">
       <DependentUpon>AddNewProblemSet.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Admin Control Screen.cs">
+    <None Include="DEPRACATED Objects\Admin Control Screen.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Admin Control Screen.Designer.cs">
+    </None>
+    <None Include="DEPRACATED Objects\Admin Control Screen.Designer.cs">
       <DependentUpon>Admin Control Screen.cs</DependentUpon>
-    </Compile>
+    </None>
     <Compile Include="Classes\Admin.cs" />
     <Compile Include="Settings.cs" />
     <None Include="DEPRACATED Objects\AppHelper.cs" />
@@ -114,13 +121,13 @@
       <DependentUpon>AssignNewProblemSet.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\MMControl.cs" />
-    <Compile Include="Forms\Create New User Screen.cs">
+    <None Include="DEPRACATED Objects\Create New User Screen.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Create New User Screen.Designer.cs">
+    </None>
+    <None Include="DEPRACATED Objects\Create New User Screen.Designer.cs">
       <DependentUpon>Create New User Screen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Classes\EndUser.cs" />
+    </None>
+    <Compile Include="Classes\Student.cs" />
     <Compile Include="Classes\FormDefaults.cs" />
     <Compile Include="Forms\frmAdminControl.cs">
       <SubType>Form</SubType>
@@ -128,7 +135,7 @@
     <Compile Include="Forms\frmAdminControl.Designer.cs">
       <DependentUpon>frmAdminControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Jungle.cs" />
+    <None Include="DEPRACATED Objects\Jungle.cs" />
     <None Include="DEPRACATED Objects\ListOfJunglesHandler.cs" />
     <Compile Include="Classes\ListOfReportHandler.cs" />
     <Compile Include="Classes\ListOfUsersXMLHandler.cs" />
@@ -162,12 +169,12 @@
     <Compile Include="Forms\Math Problem Screen.Designer.cs">
       <DependentUpon>Math Problem Screen.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Problem Select Screen.cs">
+    <None Include="DEPRACATED Objects\Problem Select Screen.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Problem Select Screen.Designer.cs">
+    </None>
+    <None Include="DEPRACATED Objects\Problem Select Screen.Designer.cs">
       <DependentUpon>Problem Select Screen.cs</DependentUpon>
-    </Compile>
+    </None>
     <Compile Include="Classes\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <None Include="DEPRACATED Objects\UserXMLHandler.cs" />
@@ -175,15 +182,15 @@
     <EmbeddedResource Include="Forms\AddNewProblemSet.resx">
       <DependentUpon>AddNewProblemSet.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Admin Control Screen.resx">
+    <None Include="DEPRACATED Objects\Admin Control Screen.resx">
       <DependentUpon>Admin Control Screen.cs</DependentUpon>
-    </EmbeddedResource>
+    </None>
     <EmbeddedResource Include="Forms\AssignNewProblemSet.resx">
       <DependentUpon>AssignNewProblemSet.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Create New User Screen.resx">
+    <None Include="DEPRACATED Objects\Create New User Screen.resx">
       <DependentUpon>Create New User Screen.cs</DependentUpon>
-    </EmbeddedResource>
+    </None>
     <EmbeddedResource Include="Forms\frmAdminControl.resx">
       <DependentUpon>frmAdminControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -199,9 +206,9 @@
     <EmbeddedResource Include="Forms\Math Problem Screen.resx">
       <DependentUpon>Math Problem Screen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Problem Select Screen.resx">
+    <None Include="DEPRACATED Objects\Problem Select Screen.resx">
       <DependentUpon>Problem Select Screen.cs</DependentUpon>
-    </EmbeddedResource>
+    </None>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -252,6 +259,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\times.png" />
+    <None Include="Resources\Subtraction.png" />
+    <None Include="Resources\Plus.png" />
+    <None Include="Resources\add_user.png" />
+    <None Include="Resources\add_user2.png" />
+    <None Include="Resources\exit.png" />
+    <None Include="Resources\Divide.png" />
+    <None Include="Resources\apply.png" />
     <Content Include="Resources\Math Monkeys Logo 2.ico" />
     <None Include="Resources\Math Monkeys Logo.jpg" />
     <None Include="Resources\Math Monkeys Logo 2.png" />

@@ -24,38 +24,106 @@ namespace Math_Monkeys
     
     public class MMControl //: FrameworkElement
     {
-        //private string _Message;
-        
+       
+        #region Member Varibles
+
         List<AssignmentSet> AllAssignmentList;
         private User currentUser;
 
-        //List<Jungle> Jungles = new List<Jungle>();
-        //Math Sets
-        //AdditionProblemSet addition = new AdditionProblemSet();
-        //SubtractionProblemSet subtraction = new SubtractionProblemSet();
         private frmLogin LoginForm;
-        private Admin_Control AdminForm;
+        private frmAdminControl AdminForm;
         private Math_Problem_Screen StudentForm;
 
         private List<User> allUserList;
-        private Classes.FileHandler FileHandler;
+        private List<Student> studentList;
+        private List<Admin> adminList;
+        private List<ProblemSet> problemSetList;
 
-        public List<User> AllUserList
+        private FileHandler FileHandler;
+
+        #endregion
+
+        #region Properties
+
+        internal List<User> AllUserList
         {
             get { return allUserList; }
             set { allUserList = value; }
         }
 
-        public MMControl()
+        internal List<Student> StudentList
         {
-            FileHandler = new Classes.FileHandler();
-            allUserList = FileHandler.GetAllUsers();
-            //default
+            get { return studentList; }
+            set { studentList = value; }
         }
 
-        public void SelectionChanged(object sender, EventArgs e)
+        internal List<Admin> AdminList
         {
-            ComboBox changed = sender as ComboBox;
+            get { return adminList; }
+            set { adminList = value; }
+        }
+
+        public User CurrentUser
+        {
+            get
+            { return currentUser;}
+        }
+
+        internal List<ProblemSet> ProblemSetList
+        {
+            get
+            {
+                return problemSetList;
+            }
+            //set
+            //{
+            //    problemSetList = value;
+            //}
+        }
+
+        #endregion
+
+        #region constructors
+
+        private void init()
+        {
+            FileHandler = new FileHandler();
+            AdminList = new List<Admin>();
+            StudentList = new List<Student>();
+            AllUserList = new List<User>();
+        }
+
+        public MMControl()
+        {
+            List<User> temp;
+
+            init();
+
+            temp = FileHandler.GetUsersByType(UserType.Administrator);
+            for(int i = 0; i < temp.Count(); i++)
+            {
+                 Admin newAdmin = new Admin(temp[i]);
+                 AdminList.Add(newAdmin);
+                 AllUserList.Add(newAdmin);
+            }
+
+            temp = FileHandler.GetUsersByType(UserType.Student);
+            for (int i = 0; i < temp.Count(); i++)
+            {
+                Student newStudent = new Student(temp[i]);
+                StudentList.Add(newStudent);
+                AllUserList.Add(newStudent);
+            }
+
+      }
+
+        #endregion
+
+        #region Event Handlers
+
+        public void LoginSelectionChanged(object sender, EventArgs e)
+        {
+           ComboBox changed = sender as ComboBox;
 
            currentUser = (User) changed.SelectedValue;
         }
@@ -69,14 +137,15 @@ namespace Math_Monkeys
             else
             {
                 LoginForm.Hide();
+                LoginForm.Close();
                 if (currentUser.UserType == UserType.Student)
                 {
-                    StudentForm = new Math_Problem_Screen(currentUser);
+                    StudentForm = new Math_Problem_Screen(this);
                     StudentForm.ShowDialog();
                 }
                 else if (currentUser.UserType == UserType.Administrator)
                 {
-                    AdminForm = new Admin_Control(currentUser);
+                    AdminForm = new frmAdminControl(this);
                     AdminForm.ShowDialog();
                 }
             }
@@ -87,6 +156,106 @@ namespace Math_Monkeys
 
         }
 
+        public void IntNumberOnly(object sender, KeyPressEventArgs e)
+        {
+            if (sender is TextBox)
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '-')
+                {
+                    e.Handled = true;
+                }
+
+                //in the key is the negative sign and it is not the first charcter ignore it.
+                if (e.KeyChar == '-' && (sender as TextBox).Text.Length > 0)
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        public void DoubleNumberOnly(object sender, KeyPressEventArgs e)
+        {
+            if (sender is TextBox)
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != '-')
+                {
+                    e.Handled = true;
+                }
+
+                //If the key is a decimal point and it is the second one ignore it.
+                if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+                {
+                    e.Handled = true;
+                }
+
+                //in the key is the negative sign and it is not the first charcter ignore it.
+                if (e.KeyChar == '-' && (sender as TextBox).Text.Length > 0)
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        public void NameOnly(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) 
+                && !char.IsLetterOrDigit(e.KeyChar) 
+                && e.KeyChar != '-' 
+                && e.KeyChar != '`' 
+                && e.KeyChar != '~' 
+                && e.KeyChar != ' '
+                && e.KeyChar != '.' 
+                && e.KeyChar != ','
+                && e.KeyChar != '\''
+                )
+            {
+                e.Handled = true;
+            }
+        }
+
+        public void UserLogout(object sender, EventArgs e)
+        {
+            Button btn = (Button)sender;
+            Form myForm = btn.FindForm();
+
+            myForm.Hide();
+            myForm.Close();
+
+            LoginForm = new frmLogin(this);
+            LoginForm.ShowDialog();
+        }
+
+        #endregion
+
+        #region Methods
+
+        internal void AddNewStudent(Student newUser)
+        {
+                       
+            AllUserList.Add(newUser);
+            StudentList.Add(newUser);
+            this.FileHandler.SaveNewUser(newUser);
+        }
+
+        internal void AddNewAdmin(Admin newUser)
+        {
+            AllUserList.Add(newUser);
+            AdminList.Add(newUser);
+            this.FileHandler.SaveNewUser(newUser);
+        }
+
+        internal void AddNewUser(User newUser)
+        {
+            AllUserList.Add(newUser);
+            this.FileHandler.SaveNewUser(newUser);
+        }
+
+        internal void AddProblemSet(ProblemSet problemSet)
+        {
+            ProblemSetList.Add(problemSet);
+            this.FileHandler.SaveNewProblemSet(problemSet);
+        }
+
         public int RunProgram()
         {
             LoginForm = new frmLogin(this);
@@ -95,11 +264,17 @@ namespace Math_Monkeys
             return 0;
         }
 
+        #endregion
 
-        private void displayLoginForm()
-        {
 
-        }
+        #region DEPRACATED CODE
+        
+        //private string _Message;
+        //List<Jungle> Jungles = new List<Jungle>();
+        //Math Sets
+        //AdditionProblemSet addition = new AdditionProblemSet();
+        //SubtractionProblemSet subtraction = new SubtractionProblemSet();
+
 
         ////Loging Form 
         //// return a list of existent user
@@ -127,6 +302,8 @@ namespace Math_Monkeys
         //
 
         //
+        #endregion
+
 
     }
 }

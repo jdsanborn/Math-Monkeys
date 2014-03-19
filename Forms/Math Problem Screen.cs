@@ -37,13 +37,15 @@ namespace Math_Monkeys
         ListOfReportHandler saveSetting = new ListOfReportHandler(); 
         User _student= new User();
         Report _stdReport = new Report();
-        private bool attempted = false; 
+        private bool attempted = false;
+
+        private MMControl MMControl;
 
         /*
          * Time to ask users some Math Questions
          * 
          * */
-        public Math_Problem_Screen(User student)
+        public Math_Problem_Screen(MMControl mmControl)
         {
             //Jungle Selection removed at customer request
             //thisJungle = theJungle;
@@ -53,6 +55,8 @@ namespace Math_Monkeys
             this.WindowState = FormWindowState.Maximized;
             this.ControlBox = false;
             InitializeComponent();
+
+            MMControl = mmControl;
 
             handledAssigList= _handler.ReadFile();
 
@@ -274,23 +278,7 @@ namespace Math_Monkeys
         /// <param name="e">the KeyPressEventArgs of the text box</param>
         private void txtInsertAnswer_KeyPress(object sender, KeyPressEventArgs e)
         {
-            //If the key is not a control key, a digit, a decimial point or a negative sign ignore it
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != '-')
-            {
-                e.Handled = true;
-            }
-
-            //If the key is a decimal point and it is the second one ignore it.
-            if (e.KeyChar == '.'  && (sender as TextBox).Text.IndexOf('.') > -1)
-            {
-                e.Handled = true;
-            }
-
-            //in the key is the negative sign and it is not the first charcter ignore it.
-            if (e.KeyChar == '-' && (sender as TextBox).Text.Length > 0)
-            {
-                e.Handled = true;
-            }
+            MMControl.DoubleNumberOnly(sender, e);
         }
 
         //public void GetUserReport(User student)

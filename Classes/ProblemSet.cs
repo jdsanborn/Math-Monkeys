@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace Math_Monkeys.Classes
+namespace Math_Monkeys
 {
      [XmlType("operand")]
     public struct Operand
@@ -42,7 +42,7 @@ namespace Math_Monkeys.Classes
     {
         #region member variables
        
-        private uint id;
+        private string id;
         private string name;
         private Operation operation;
         private Operand[] operand;
@@ -53,7 +53,7 @@ namespace Math_Monkeys.Classes
         #region properties
 
         [XmlElement("id")]
-        public uint ID 
+        public string ID 
         {
             get
             {
@@ -128,9 +128,9 @@ namespace Math_Monkeys.Classes
 
         private void init()
         {
-            ID = 0;
+            ID = string.Empty;
             Name = string.Empty;
-            Operation = Classes.Operation.None;
+            Operation = Operation.None;
             Operand = new Operand[0];
         }
 
@@ -141,7 +141,7 @@ namespace Math_Monkeys.Classes
             init();            
         }
 
-        public ProblemSet(uint id, string name, Operation operation, Operand[] operand)
+        public ProblemSet(string id, string name, Operation operation, Operand[] operand)
         {
             init();
             this.ID = id;

@@ -29,9 +29,9 @@ namespace Math_Monkeys
 
         public frmLogin(MMControl mmControl)
         {
-
+            
             InitializeComponent();
-            this.ddlUserName.SelectedIndexChanged += new EventHandler(mmControl.SelectionChanged);
+            this.ddlUserName.SelectedIndexChanged += new EventHandler(mmControl.LoginSelectionChanged);
             this.btnBegin.Click += new EventHandler(mmControl.Login);
             this.FormClosing += new FormClosingEventHandler(mmControl.LoginFormClosing);
             MMControl = mmControl;
@@ -60,39 +60,39 @@ namespace Math_Monkeys
         //if admin type open the admin application, else if enduser open the math session
         private void btnBegin_Click(object sender, EventArgs e)
         {
-            int reset=0;
-            if((ddlUserName.SelectedIndex) != -1)
-            {
-            for (int i=reset; i < EndUserList.Count; i++)
-            {
-                try
-                {
-                    if (ddlUserName.SelectedItem.ToString() == EndUserList[i].ScreenName)
-                    {
-                        if (EndUserList[i].UserType == UserType.Administrator)
-                        {
-                            AdminWorking = true;
-                            i = reset;
-                            Admin_Control adminscreen = new Admin_Control(EndUserList[i]);
-                            adminscreen.ShowDialog();
-                            updateDdlist();
-                            AdminWorking = false;
-                        }
-                        else if (EndUserList[i].UserType == UserType.Student)
-                        {
-                            Math_Problem_Screen nextscreen = new Math_Problem_Screen(EndUserList[i]);
-                            //Problem_Select_Screen nextscreen = new Problem_Select_Screen(EndUserList[i]);
-                            //nextscreen.WelcomeLabel = "WELCOME " + EndUserList[i].ScreenName;
-                            nextscreen.ShowDialog();
-                        }
-                    }
-                }
-                catch (NullReferenceException x)
-                {
+            //int reset=0;
+            //if((ddlUserName.SelectedIndex) != -1)
+            //{
+            //for (int i=reset; i < EndUserList.Count; i++)
+            //{
+            //    try
+            //    {
+            //        if (ddlUserName.SelectedItem.ToString() == EndUserList[i].ScreenName)
+            //        {
+            //            if (EndUserList[i].UserType == UserType.Administrator)
+            //            {
+            //                AdminWorking = true;
+            //                i = reset;
+            //                Admin_Control adminscreen = new Admin_Control(EndUserList[i]);
+            //                adminscreen.ShowDialog();
+            //                updateDdlist();
+            //                AdminWorking = false;
+            //            }
+            //            else if (EndUserList[i].UserType == UserType.Student)
+            //            {
+            //                Math_Problem_Screen nextscreen = new Math_Problem_Screen(EndUserList[i]);
+            //                //Problem_Select_Screen nextscreen = new Problem_Select_Screen(EndUserList[i]);
+            //                //nextscreen.WelcomeLabel = "WELCOME " + EndUserList[i].ScreenName;
+            //                nextscreen.ShowDialog();
+            //            }
+            //        }
+            //    }
+            //    catch (NullReferenceException x)
+            //    {
 
-                }
-            }
-            }
+            //    }
+            //}
+            //}
         }
        
         //set the current date in login form 
@@ -107,32 +107,27 @@ namespace Math_Monkeys
         //Fill out the dropDown list with user accessible to this application
         public void updateDdlist()
         {
-            ddlUserName.Items.Clear();
-            EndUserList.Clear(); 
+            //ddlUserName.Items.Clear();
+            //EndUserList.Clear(); 
 
-            ListOfUsersXMLHandler userHandler = new ListOfUsersXMLHandler();
+            //ListOfUsersXMLHandler userHandler = new ListOfUsersXMLHandler();
             
-            //List<string> AdminList = userHandler.GetAdminList();
-            string filename = "ListOfUsers.xml"; // FILENAME OF LIST OF USERS XML
-            EndUserList = userHandler.ReadFile(filename);
+            ////List<string> AdminList = userHandler.GetAdminList();
+            //string filename = "ListOfUsers.xml"; // FILENAME OF LIST OF USERS XML
+            //EndUserList = userHandler.ReadFile(filename);
 
-            btnBegin.Update();
-            for (int i = 0; i < EndUserList.Count; i++)
-            {
-                try
-                {
-                    ddlUserName.Items.Insert(i, EndUserList[i].ScreenName);
-                }
-                catch (ArgumentOutOfRangeException x)
-                {
+            //btnBegin.Update();
+            //for (int i = 0; i < EndUserList.Count; i++)
+            //{
+            //    try
+            //    {
+            //        ddlUserName.Items.Insert(i, EndUserList[i].ScreenName);
+            //    }
+            //    catch (ArgumentOutOfRangeException x)
+            //    {
 
-                }
-            }
-        }
-
-        private void lblTodayDate_Click(object sender, EventArgs e)
-        {
-
+            //    }
+            //}
         }
 
         private void imgMathMonkeys_Click(object sender, EventArgs e)
@@ -140,20 +135,7 @@ namespace Math_Monkeys
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ddlUserName_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
+       
 
     }
 }

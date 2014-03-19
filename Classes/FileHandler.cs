@@ -9,7 +9,7 @@ using System.Data;
 using System.Windows.Forms;
 
 
-namespace Math_Monkeys.Classes
+namespace Math_Monkeys
 {
     class FileHandler
     {
@@ -109,7 +109,7 @@ namespace Math_Monkeys.Classes
 
         #region User Methods
 
-            public User GetUserByID(uint id)
+            public User GetUserByID(string id)
             {
                 var users = from user in GetAllUsers()
                                where user.ID == id
@@ -118,11 +118,12 @@ namespace Math_Monkeys.Classes
                 return userList.Count > 0 ? userList[0]: null;
             }
 
-            public List<User> GetUserList(UserType userType)
+            public List<User> GetUsersByType(UserType userType)
             {
                 var userList = from user in GetAllUsers()
                         where user.UserType == userType
                         select user;
+               
                 return new List<User>(userList);
             }
 
@@ -139,7 +140,7 @@ namespace Math_Monkeys.Classes
                     userList = usersDocument.Descendants("user").Select( d =>
                                     new User
                                         {
-                                            ID = uint.Parse(d.Element("id").Value),
+                                            ID = d.Element("id").Value,
                                             UserType = (UserType) Enum.Parse(typeof(UserType), d.Element("type").Value, true),
                                             ScreenName = d.Element("screenname").Value,
                                             FirstName = d.Element("name").Element("first").Value,
@@ -207,7 +208,7 @@ namespace Math_Monkeys.Classes
                     if (userFile != null)
                     {
                         var users = from elem in userFile.Descendants("user")
-                                    where user.ID == uint.Parse(elem.Element("id").Value)
+                                    where user.ID == elem.Element("id").Value
                                     select elem;
 
                         foreach (XElement item in users)
@@ -238,7 +239,7 @@ namespace Math_Monkeys.Classes
                     if (userFile != null)
                     {
                         var users = from elem in userFile.Descendants("user")
-                                    where user.ID == uint.Parse(elem.Element("id").Value)
+                                    where user.ID == elem.Element("id").Value
                                     select elem;
 
                         foreach (XElement item in users)
@@ -260,7 +261,7 @@ namespace Math_Monkeys.Classes
 
         #region Assignment Methods
 
-            public Assignment GetAssignmentByID(uint id)
+            public Assignment GetAssignmentByID(string id)
             {
                 var assignments = from assign in GetAllAssignments()
                                   where assign.ID == id
@@ -282,9 +283,9 @@ namespace Math_Monkeys.Classes
                     assignmentList = usersDocument.Descendants("assignment").Select(d =>
                                     new Assignment
                                     {
-                                        ID = uint.Parse(d.Element("id").Value),
-                                        UserID = uint.Parse(d.Element("userID").Value),
-                                        ProblemSetID = uint.Parse(d.Element("problemSetID").Value),
+                                        ID = d.Element("id").Value,
+                                        UserID = d.Element("userID").Value,
+                                        ProblemSetID = d.Element("problemSetID").Value,
                                         Goal = double.Parse(d.Element("goal").Value)
                                     }
                                 ).ToList();
@@ -351,7 +352,7 @@ namespace Math_Monkeys.Classes
                     if (assignmentFile != null)
                     {
                         var assignments = from elem in assignmentFile.Descendants("assignment")
-                                          where assignment.ID == uint.Parse(elem.Element("id").Value)
+                                          where assignment.ID == elem.Element("id").Value
                                     select elem;
 
                         foreach (XElement item in assignments)
@@ -382,7 +383,7 @@ namespace Math_Monkeys.Classes
                     if (assignmentFile != null)
                     {
                         var assignments = from elem in assignmentFile.Descendants("assignment")
-                                    where assignment.ID == uint.Parse(elem.Element("id").Value)
+                                    where assignment.ID == elem.Element("id").Value
                                     select elem;
 
                         foreach (XElement item in assignments)
@@ -419,7 +420,7 @@ namespace Math_Monkeys.Classes
                     problemSetsList = problemSetsDocument.Descendants("problemSet").Select(d =>
                                     new ProblemSet
                                     {
-                                        ID = uint.Parse(d.Element("id").Value),
+                                        ID = d.Element("id").Value,
                                         Name = d.Element("name").Value,
                                         Operation = (Operation) Enum.Parse(typeof(Operation), d.Element("Operation").Value, true),
                                         Operand =  d.Element("operands").Descendants("operand").Select( x => 
@@ -440,7 +441,7 @@ namespace Math_Monkeys.Classes
                 return problemSetsList;
             }
 
-            public ProblemSet GetProblemSetByID(uint id)
+            public ProblemSet GetProblemSetByID(string id)
             {
                 var problemsSets = from problemSet in GetAllProblemSets()
                                    where problemSet.ID == id
@@ -497,7 +498,7 @@ namespace Math_Monkeys.Classes
                     if (problemSetFile != null)
                     {
                         var problemSets = from elem in problemSetFile.Descendants("problemSet")
-                                          where problemSet.ID == uint.Parse(elem.Element("id").Value)
+                                          where problemSet.ID == elem.Element("id").Value
                                           select elem;
 
                         foreach (XElement item in problemSets)
@@ -528,7 +529,7 @@ namespace Math_Monkeys.Classes
                     if (problemSetFile != null)
                     {
                         var problemSets = from elem in problemSetFile.Descendants("problemSet")
-                                          where problemSet.ID == uint.Parse(elem.Element("id").Value)
+                                          where problemSet.ID == elem.Element("id").Value
                                           select elem;
 
                         foreach (XElement item in problemSets)
@@ -566,8 +567,8 @@ namespace Math_Monkeys.Classes
                         assignmentAttempsList = assignmentAttempsDocument.Descendants("assignmentAttemps").Select(d =>
                                         new AssignmentAttempt
                                         {
-                                            ID = uint.Parse(d.Element("id").Value),
-                                            AssignmentID = uint.Parse(d.Element("assignmentID").Value),
+                                            ID = d.Element("id").Value,
+                                            AssignmentID = d.Element("assignmentID").Value,
                                             Date = DateTime.Parse(d.Element("date").Value),
                                             Grade = Double.Parse(d.Element("grade").Value),
                                             TimeSpent = TimeSpan.Parse(d.Element("timeSpent").Value)
@@ -583,7 +584,7 @@ namespace Math_Monkeys.Classes
                 return assignmentAttempsList;
             }
 
-            public AssignmentAttempt GetAssignmentAttemptByID(uint id)
+            public AssignmentAttempt GetAssignmentAttemptByID(string id)
             {
                 var assignmentAttempts = from assignmentAttempt in GetAllAssignmentAttempts()
                                          where assignmentAttempt.ID == id
@@ -592,7 +593,7 @@ namespace Math_Monkeys.Classes
                 return assignmentAttemptList.Count > 0 ? assignmentAttemptList[0] : null;
             }
 
-            public List<AssignmentAttempt> GetAssignmentAttemptsByAssignmentID(uint id)
+            public List<AssignmentAttempt> GetAssignmentAttemptsByAssignmentID(string id)
             {
                 var assignmentAttempts = from assignmentAttempt in GetAllAssignmentAttempts()
                                          where assignmentAttempt.AssignmentID == id
@@ -651,7 +652,7 @@ namespace Math_Monkeys.Classes
                     if (assignmentAttemptFile != null)
                     {
                         var assignmentAttempts = from elem in assignmentAttemptFile.Descendants("assignmentAttempt")
-                                          where assignmentAttempt.ID == uint.Parse(elem.Element("id").Value)
+                                          where assignmentAttempt.ID == elem.Element("id").Value
                                           select elem;
 
                         foreach (XElement item in assignmentAttempts)
@@ -682,7 +683,7 @@ namespace Math_Monkeys.Classes
                     if (assignmentAttemptFile != null)
                     {
                         var assignmentAttempts = from elem in assignmentAttemptFile.Descendants("assignmentAttempt")
-                                          where assignmentAttempt.ID == uint.Parse(elem.Element("id").Value)
+                                          where assignmentAttempt.ID == elem.Element("id").Value
                                           select elem;
 
                         foreach (XElement item in assignmentAttempts)

@@ -14,6 +14,8 @@ namespace Math_Monkeys
 {
     class Admin : User
     {
+        private User ptrUser;
+
         private void init()
         {
 
@@ -22,6 +24,25 @@ namespace Math_Monkeys
         public Admin() : base()
         {
             init();
+        }
+
+         public Admin(string id, UserType userType, string fistName, string lastName, string screenName, string password)
+            :base(id, userType, fistName, lastName, screenName, password )
+        {
+            init();
+        }
+
+        public Admin(User user) : base()
+        {
+            init();
+            
+            this.ID = user.ID;
+            this.UserType = user.UserType;
+            this.FirstName = user.FirstName;
+            this.LastName = user.LastName;
+            this.ScreenName = user.ScreenName;
+            this.Password = user.Password;
+            this.LastLoginDate = user.LastLoginDate;
         }
     }
 }

@@ -12,16 +12,16 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace Math_Monkeys.Classes
+namespace Math_Monkeys
 {
     [XmlType("assignment")]
     class Assignment
     {
         #region member variables
 
-        private uint id;
-        private uint userID;
-        private uint problemSetID;
+        private string id;
+        private string userID;
+        private string problemSetID;
         private double goal;
 
         #endregion 
@@ -29,7 +29,7 @@ namespace Math_Monkeys.Classes
         #region properties
 
         [XmlElement("id")]
-        public uint ID
+        public string ID
         {
             get 
             { 
@@ -42,11 +42,11 @@ namespace Math_Monkeys.Classes
         }
 
         [XmlElement("userID")]
-        public uint UserID
+        public string UserID
         {
             get
             {
-                return userID;
+                return userID; 
             }
             set
             {
@@ -55,7 +55,7 @@ namespace Math_Monkeys.Classes
         }
 
         [XmlElement("ProblemSetID")]
-        public uint ProblemSetID
+        public string ProblemSetID
         {
             get
             {
@@ -95,9 +95,9 @@ namespace Math_Monkeys.Classes
 
         private void init()
         {
-            ID = 0;
-            UserID = 0;
-            ProblemSetID = 0;
+            ID = string.Empty;
+            UserID = string.Empty;
+            ProblemSetID = string.Empty;
             Goal = 0.0;
         }
 
@@ -108,7 +108,7 @@ namespace Math_Monkeys.Classes
             init();
         }
 
-        public Assignment(uint id, uint userID, uint problemSetId, double goal)
+        public Assignment(string id, string userID, string problemSetId, double goal)
         {
             init();
 

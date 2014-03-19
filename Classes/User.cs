@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
-using System.IO; 
+using System.IO;
 
 namespace Math_Monkeys
 {
@@ -49,21 +49,20 @@ namespace Math_Monkeys
 
         #region Member Variables
 
-        private uint id;
+        private string id;
         private DateTime? lastLoginDate;
         private UserType type;
         private string firstName;
         private string lastName;
         private string screenName;
         private string password;
-       
-       
+
         #endregion
 
         #region properties
 
         [XmlElement("id")]
-        public uint ID 
+        public string ID 
         { 
             get
             { 
@@ -72,18 +71,8 @@ namespace Math_Monkeys
             set
             {
                 
-                if (value < 0)
-                {
-                    id = 0;
-                }
-                else if (value > uint.MaxValue)
-                {
-                    id = uint.MaxValue;
-                }
-                else
-                {
-                    id = value;
-                }
+                id = value;
+                
             }
         }
 
@@ -120,7 +109,7 @@ namespace Math_Monkeys
             }
         }
 
-        public string GetUserType
+        public string GetUserTypeString
         {
             get
             {
@@ -210,7 +199,7 @@ namespace Math_Monkeys
 
         private void init()
         {
-            ID = 0;
+            ID = string.Empty;
             LastLoginDate = DateTime.MinValue;
             UserType =  UserType.None;
             FirstName = string.Empty;
@@ -227,7 +216,7 @@ namespace Math_Monkeys
             init();
         }
 
-        public User(uint id, UserType userType, string fistName, string lastName, string screenName, string password )
+        public User(string id, UserType userType, string fistName, string lastName, string screenName, string password )
         {
             init();
 

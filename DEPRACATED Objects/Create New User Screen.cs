@@ -84,8 +84,9 @@ namespace Math_Monkeys
         private uint  AddNametoDoc(string Name)
         {
             
-            NewUserHandler.WriteFile("ListOfUsers.xml",Name);
-            return NewUserHandler.getCount("ListOfUsers.xml");
+           // NewUserHandler.WriteFile("ListOfUsers.xml",Name);
+           // return NewUserHandler.getCount("ListOfUsers.xml");
+            return 0;
         }
 
         private void NewUserForm_Load(object sender, EventArgs e)

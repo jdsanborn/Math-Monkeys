@@ -60,7 +60,6 @@
             this.ddlUserName.Name = "ddlUserName";
             this.ddlUserName.Size = new System.Drawing.Size(450, 41);
             this.ddlUserName.TabIndex = 0;
-            this.ddlUserName.SelectedIndexChanged += new System.EventHandler(this.ddlUserName_SelectedIndexChanged);
             // 
             // lblPleaseChoose
             // 
@@ -71,7 +70,6 @@
             this.lblPleaseChoose.Size = new System.Drawing.Size(368, 33);
             this.lblPleaseChoose.TabIndex = 2;
             this.lblPleaseChoose.Text = "Please Choose Your Name";
-            this.lblPleaseChoose.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnBegin
             // 
@@ -95,7 +93,6 @@
             this.lblTodayDate.TabIndex = 4;
             this.lblTodayDate.Text = "MM/DD/YYYY HH:MM";
             this.lblTodayDate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblTodayDate.Click += new System.EventHandler(this.lblTodayDate_Click);
             // 
             // tmrClock
             // 
@@ -107,7 +104,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(534, 462);
+            this.ClientSize = new System.Drawing.Size(534, 461);
             this.Controls.Add(this.lblTodayDate);
             this.Controls.Add(this.btnBegin);
             this.Controls.Add(this.lblPleaseChoose);

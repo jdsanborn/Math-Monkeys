@@ -114,7 +114,7 @@ namespace Math_Monkeys
         public void WriteFile(string fName, string userName) // Adds just a student for now with  uniqueID=count and some userName
         {
             _fileName = fName;
-            count = getCount(_fileName);
+            //count = getCount(_fileName);
 
             if (File.Exists("ListOfUsers.xml") == true) // Checks if file exists
             {
@@ -158,7 +158,7 @@ namespace Math_Monkeys
                         
                          new User
                          {
-                             ID = uint.Parse(d.Element("UniqueID").Value),
+                             ID = d.Element("UniqueID").Value,
                              ScreenName = d.Element("Name").Value,
                              UserType = (UserType) Enum.Parse(typeof(UserType), d.Element("Type").Value, true),  //hmmm
                              LastLoginDate = isDateSet(d.Element("LoginDate").Value),
@@ -248,19 +248,19 @@ namespace Math_Monkeys
         }
         
         //this will allow us to determine what ID to assign to a new user
-        public uint getCount(string fName)
-        {
-            ReadFile(fName);
-            int index = listOfUsers.Count;
-            if (index == 0)
-            {
-                return 0;
-            }
-            else
-            {
-                return (listOfUsers[index - 1].ID + 1);
-            }
-        }
+        //public uint getCount(string fName)
+        //{
+        //    ReadFile(fName);
+        //    int index = listOfUsers.Count;
+        //    if (index == 0)
+        //    {
+        //        return 0;
+        //    }
+        //    else
+        //    {
+        //        return (listOfUsers[index - 1].ID + 1);
+        //    }
+        //}
 
         //Process of removing an User from XML file
         public void RemoveUserFromXML(string UserName, string fileName)
