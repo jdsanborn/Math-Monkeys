@@ -14,7 +14,10 @@ using System.Xml.Serialization;
 
 namespace Math_Monkeys
 {
-     [XmlType("assignmentAttempt")]
+    /// <summary>
+    /// 
+    /// </summary>
+     [XmlType("AssignmentAttempt")]
     class AssignmentAttempt
     {
         #region member variables
@@ -29,7 +32,10 @@ namespace Math_Monkeys
 
         #region properties
 
-        [XmlElement("id")]
+         /// <summary>
+         /// 
+         /// </summary>
+        [XmlElement("ID")]
         public string ID
         {
             get
@@ -42,7 +48,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("assignmentID")]
+        [XmlElement("AssignmentID")]
         public string AssignmentID
         {
             get
@@ -55,7 +61,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("date")]
+        [XmlElement("Date")]
         public DateTime? Date
         {
             get
@@ -79,7 +85,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("grade")]
+        [XmlElement("Grade")]
         public double Grade
         {
             get
@@ -103,7 +109,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("timeSpent")]
+        [XmlElement("TimeSpent")]
         public TimeSpan TimeSpent
         {
             get

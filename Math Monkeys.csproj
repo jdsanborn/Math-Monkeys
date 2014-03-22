@@ -96,13 +96,19 @@
     <Compile Include="Classes\Assignment.cs" />
     <Compile Include="Classes\AssignmentAttempt.cs" />
     <Compile Include="Classes\FileHandler.cs" />
+    <Compile Include="Classes\Operand.cs" />
+    <Compile Include="Classes\Operation.cs" />
     <Compile Include="Classes\ProblemSet.cs" />
+    <Compile Include="Classes\UserType.cs" />
     <Compile Include="Forms\AddNewProblemSet.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\AddNewProblemSet.Designer.cs">
       <DependentUpon>AddNewProblemSet.cs</DependentUpon>
     </Compile>
+    <None Include="Classes\User.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DEPRACATED Objects\Admin Control Screen.cs">
       <SubType>Form</SubType>
     </None>
@@ -232,6 +238,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Student.datasource" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\mathmonkeyslogo2.gif" />

@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 
 namespace Math_Monkeys
 {
-    [XmlType("assignment")]
+    [XmlType("Assignment")]
     class Assignment
     {
         #region member variables
@@ -28,7 +28,7 @@ namespace Math_Monkeys
 
         #region properties
 
-        [XmlElement("id")]
+        [XmlElement("ID")]
         public string ID
         {
             get 
@@ -41,7 +41,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("userID")]
+        [XmlElement("UserID")]
         public string UserID
         {
             get
@@ -67,7 +67,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("goal")]
+        [XmlElement("Goal")]
         public double Goal
         {
             get

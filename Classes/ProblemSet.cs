@@ -13,31 +13,8 @@ using System.Xml.Serialization;
 
 namespace Math_Monkeys
 {
-     [XmlType("operand")]
-    public struct Operand
-    {
-          [XmlElement("rangeMax")]
-        public int rangeMax;
-          [XmlElement("rangeMin")]
-        public int rangeMin;
-    }
 
-     [XmlType("operation")]
-    public enum Operation
-    {
-         [XmlEnum(Name = "None")]
-        None,
-          [XmlEnum(Name = "Addition")]
-        Addition,
-          [XmlEnum(Name = "Subtraction")]
-        Subtraction,
-          [XmlEnum(Name = "Multiplicaiton")]
-        Multiplication,
-          [XmlEnum(Name = "Division")]
-        Division
-    }
-
-    [XmlType("problemSet")]
+    [XmlType("ProblemSet")]
     class ProblemSet
     {
         #region member variables
@@ -52,7 +29,7 @@ namespace Math_Monkeys
 
         #region properties
 
-        [XmlElement("id")]
+        [XmlElement("ID")]
         public string ID 
         {
             get
@@ -65,7 +42,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("name")]
+        [XmlElement("Name")]
         public string Name
         {
             get
@@ -85,7 +62,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("operation")]
+        [XmlElement("Operation")]
         public Operation Operation
         {
             get
@@ -98,7 +75,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("operand")]
+        [XmlElement("Operand")]
         public Operand[] Operand
         {
             get
@@ -111,7 +88,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("numberOfProblems")]
+        [XmlElement("NumberOfProblems")]
         public uint NumberOfProblems
         {
             get

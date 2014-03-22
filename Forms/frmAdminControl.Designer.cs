@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAdminControl));
             this.tbcAdmin = new System.Windows.Forms.TabControl();
             this.tbpReports = new System.Windows.Forms.TabPage();
@@ -40,6 +41,16 @@
             this.dgvReport = new System.Windows.Forms.DataGridView();
             this.dgvStudents = new System.Windows.Forms.DataGridView();
             this.clmCheckBox = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.screenNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastLoginDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.userTypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.getUserTypeStringDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.passwordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.getFullNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.studentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tbpAssignments = new System.Windows.Forms.TabPage();
             this.tbpStudents = new System.Windows.Forms.TabPage();
             this.gbxCreateNewUser = new System.Windows.Forms.GroupBox();
@@ -102,6 +113,7 @@
             this.gbxReportDates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.studentBindingSource)).BeginInit();
             this.tbpStudents.SuspendLayout();
             this.gbxCreateNewUser.SuspendLayout();
             this.gbxUserType.SuspendLayout();
@@ -141,11 +153,11 @@
             this.tbpReports.Controls.Add(this.dgvStudents);
             this.tbpReports.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Math_Monkeys.Properties.Settings.Default, "adminFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbpReports.Font = global::Math_Monkeys.Properties.Settings.Default.adminFont;
-            this.tbpReports.Location = new System.Drawing.Point(4, 29);
+            this.tbpReports.Location = new System.Drawing.Point(4, 38);
             this.tbpReports.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbpReports.Name = "tbpReports";
             this.tbpReports.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbpReports.Size = new System.Drawing.Size(1040, 536);
+            this.tbpReports.Size = new System.Drawing.Size(1040, 527);
             this.tbpReports.TabIndex = 0;
             this.tbpReports.Text = "Reports";
             this.tbpReports.UseVisualStyleBackColor = true;
@@ -167,7 +179,7 @@
             // 
             this.dtbEndDate.Location = new System.Drawing.Point(447, 34);
             this.dtbEndDate.Name = "dtbEndDate";
-            this.dtbEndDate.Size = new System.Drawing.Size(200, 26);
+            this.dtbEndDate.Size = new System.Drawing.Size(200, 35);
             this.dtbEndDate.TabIndex = 3;
             this.ttFrmAdmin.SetToolTip(this.dtbEndDate, "The ending date from which you want to see progress reports.");
             // 
@@ -179,7 +191,7 @@
             this.lblStartDate.Font = global::Math_Monkeys.Properties.Settings.Default.adminFont;
             this.lblStartDate.Location = new System.Drawing.Point(5, 40);
             this.lblStartDate.Name = "lblStartDate";
-            this.lblStartDate.Size = new System.Drawing.Size(87, 20);
+            this.lblStartDate.Size = new System.Drawing.Size(124, 29);
             this.lblStartDate.TabIndex = 4;
             this.lblStartDate.Text = "Start Date:";
             // 
@@ -188,7 +200,7 @@
             this.lblEndDate.AutoSize = true;
             this.lblEndDate.Location = new System.Drawing.Point(360, 40);
             this.lblEndDate.Name = "lblEndDate";
-            this.lblEndDate.Size = new System.Drawing.Size(81, 20);
+            this.lblEndDate.Size = new System.Drawing.Size(118, 29);
             this.lblEndDate.TabIndex = 5;
             this.lblEndDate.Text = "End Date:";
             // 
@@ -198,7 +210,7 @@
             this.dtpStartDate.Font = global::Math_Monkeys.Properties.Settings.Default.adminFont;
             this.dtpStartDate.Location = new System.Drawing.Point(94, 35);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(200, 26);
+            this.dtpStartDate.Size = new System.Drawing.Size(200, 35);
             this.dtpStartDate.TabIndex = 2;
             this.ttFrmAdmin.SetToolTip(this.dtpStartDate, "The beginning date from which you want to see progress reports.");
             // 
@@ -212,37 +224,138 @@
             this.dgvReport.Name = "dgvReport";
             this.dgvReport.Size = new System.Drawing.Size(1022, 178);
             this.dgvReport.TabIndex = 1;
-            this.dgvReport.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReport_CellContentClick);
             // 
             // dgvStudents
             // 
+            this.dgvStudents.AllowUserToAddRows = false;
+            this.dgvStudents.AllowUserToDeleteRows = false;
             this.dgvStudents.AllowUserToOrderColumns = true;
             this.dgvStudents.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvStudents.AutoGenerateColumns = false;
             this.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStudents.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.clmCheckBox});
+            this.clmCheckBox,
+            this.firstNameDataGridViewTextBoxColumn,
+            this.lastNameDataGridViewTextBoxColumn,
+            this.screenNameDataGridViewTextBoxColumn,
+            this.lastLoginDateDataGridViewTextBoxColumn,
+            this.iDDataGridViewTextBoxColumn,
+            this.userTypeDataGridViewTextBoxColumn,
+            this.getUserTypeStringDataGridViewTextBoxColumn,
+            this.passwordDataGridViewTextBoxColumn,
+            this.getFullNameDataGridViewTextBoxColumn});
+            this.dgvStudents.DataSource = this.studentBindingSource;
             this.dgvStudents.Location = new System.Drawing.Point(7, 24);
             this.dgvStudents.Name = "dgvStudents";
+            this.dgvStudents.ReadOnly = true;
+            this.dgvStudents.RowTemplate.Height = 28;
             this.dgvStudents.Size = new System.Drawing.Size(1019, 164);
             this.dgvStudents.TabIndex = 0;
             // 
             // clmCheckBox
             // 
             this.clmCheckBox.Frozen = true;
-            this.clmCheckBox.HeaderText = "";
+            this.clmCheckBox.HeaderText = "Selected";
             this.clmCheckBox.Name = "clmCheckBox";
+            this.clmCheckBox.ReadOnly = true;
+            this.clmCheckBox.Visible = false;
+            // 
+            // firstNameDataGridViewTextBoxColumn
+            // 
+            this.firstNameDataGridViewTextBoxColumn.DataPropertyName = "FirstName";
+            this.firstNameDataGridViewTextBoxColumn.HeaderText = "First Name";
+            this.firstNameDataGridViewTextBoxColumn.MaxInputLength = 100;
+            this.firstNameDataGridViewTextBoxColumn.MinimumWidth = 50;
+            this.firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
+            this.firstNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.firstNameDataGridViewTextBoxColumn.Width = 200;
+            // 
+            // lastNameDataGridViewTextBoxColumn
+            // 
+            this.lastNameDataGridViewTextBoxColumn.DataPropertyName = "LastName";
+            this.lastNameDataGridViewTextBoxColumn.HeaderText = "Last Name";
+            this.lastNameDataGridViewTextBoxColumn.MaxInputLength = 100;
+            this.lastNameDataGridViewTextBoxColumn.MinimumWidth = 50;
+            this.lastNameDataGridViewTextBoxColumn.Name = "lastNameDataGridViewTextBoxColumn";
+            this.lastNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lastNameDataGridViewTextBoxColumn.Width = 200;
+            // 
+            // screenNameDataGridViewTextBoxColumn
+            // 
+            this.screenNameDataGridViewTextBoxColumn.DataPropertyName = "ScreenName";
+            this.screenNameDataGridViewTextBoxColumn.HeaderText = "Screen Name";
+            this.screenNameDataGridViewTextBoxColumn.MinimumWidth = 50;
+            this.screenNameDataGridViewTextBoxColumn.Name = "screenNameDataGridViewTextBoxColumn";
+            this.screenNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.screenNameDataGridViewTextBoxColumn.Width = 200;
+            // 
+            // lastLoginDateDataGridViewTextBoxColumn
+            // 
+            this.lastLoginDateDataGridViewTextBoxColumn.DataPropertyName = "LastLoginDate";
+            dataGridViewCellStyle1.Format = "g";
+            dataGridViewCellStyle1.NullValue = null;
+            this.lastLoginDateDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.lastLoginDateDataGridViewTextBoxColumn.HeaderText = "Last Login Date";
+            this.lastLoginDateDataGridViewTextBoxColumn.MinimumWidth = 50;
+            this.lastLoginDateDataGridViewTextBoxColumn.Name = "lastLoginDateDataGridViewTextBoxColumn";
+            this.lastLoginDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lastLoginDateDataGridViewTextBoxColumn.Width = 250;
+            // 
+            // iDDataGridViewTextBoxColumn
+            // 
+            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
+            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
+            this.iDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.iDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // userTypeDataGridViewTextBoxColumn
+            // 
+            this.userTypeDataGridViewTextBoxColumn.DataPropertyName = "UserType";
+            this.userTypeDataGridViewTextBoxColumn.HeaderText = "UserType";
+            this.userTypeDataGridViewTextBoxColumn.Name = "userTypeDataGridViewTextBoxColumn";
+            this.userTypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.userTypeDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // getUserTypeStringDataGridViewTextBoxColumn
+            // 
+            this.getUserTypeStringDataGridViewTextBoxColumn.DataPropertyName = "GetUserTypeString";
+            this.getUserTypeStringDataGridViewTextBoxColumn.HeaderText = "GetUserTypeString";
+            this.getUserTypeStringDataGridViewTextBoxColumn.Name = "getUserTypeStringDataGridViewTextBoxColumn";
+            this.getUserTypeStringDataGridViewTextBoxColumn.ReadOnly = true;
+            this.getUserTypeStringDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // passwordDataGridViewTextBoxColumn
+            // 
+            this.passwordDataGridViewTextBoxColumn.DataPropertyName = "Password";
+            this.passwordDataGridViewTextBoxColumn.HeaderText = "Password";
+            this.passwordDataGridViewTextBoxColumn.Name = "passwordDataGridViewTextBoxColumn";
+            this.passwordDataGridViewTextBoxColumn.ReadOnly = true;
+            this.passwordDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // getFullNameDataGridViewTextBoxColumn
+            // 
+            this.getFullNameDataGridViewTextBoxColumn.DataPropertyName = "GetFullName";
+            this.getFullNameDataGridViewTextBoxColumn.HeaderText = "GetFullName";
+            this.getFullNameDataGridViewTextBoxColumn.Name = "getFullNameDataGridViewTextBoxColumn";
+            this.getFullNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.getFullNameDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // studentBindingSource
+            // 
+            this.studentBindingSource.DataSource = typeof(Math_Monkeys.Student);
             // 
             // tbpAssignments
             // 
             this.tbpAssignments.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Math_Monkeys.Properties.Settings.Default, "adminFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbpAssignments.Font = global::Math_Monkeys.Properties.Settings.Default.adminFont;
-            this.tbpAssignments.Location = new System.Drawing.Point(4, 29);
+            this.tbpAssignments.Location = new System.Drawing.Point(4, 38);
             this.tbpAssignments.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbpAssignments.Name = "tbpAssignments";
             this.tbpAssignments.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbpAssignments.Size = new System.Drawing.Size(1077, 802);
+            this.tbpAssignments.Size = new System.Drawing.Size(1040, 527);
             this.tbpAssignments.TabIndex = 1;
             this.tbpAssignments.Text = "Assignments";
             this.tbpAssignments.UseVisualStyleBackColor = true;
@@ -252,9 +365,9 @@
             this.tbpStudents.Controls.Add(this.gbxCreateNewUser);
             this.tbpStudents.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Math_Monkeys.Properties.Settings.Default, "adminFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbpStudents.Font = global::Math_Monkeys.Properties.Settings.Default.adminFont;
-            this.tbpStudents.Location = new System.Drawing.Point(4, 29);
+            this.tbpStudents.Location = new System.Drawing.Point(4, 38);
             this.tbpStudents.Name = "tbpStudents";
-            this.tbpStudents.Size = new System.Drawing.Size(1077, 802);
+            this.tbpStudents.Size = new System.Drawing.Size(1040, 527);
             this.tbpStudents.TabIndex = 3;
             this.tbpStudents.Text = "Students";
             this.tbpStudents.UseVisualStyleBackColor = true;
@@ -289,7 +402,7 @@
             this.lblNewUserCreated.Image = global::Math_Monkeys.Properties.Resources.apply;
             this.lblNewUserCreated.Location = new System.Drawing.Point(137, 243);
             this.lblNewUserCreated.Name = "lblNewUserCreated";
-            this.lblNewUserCreated.Size = new System.Drawing.Size(212, 29);
+            this.lblNewUserCreated.Size = new System.Drawing.Size(313, 40);
             this.lblNewUserCreated.TabIndex = 10;
             this.lblNewUserCreated.Text = "New User Created";
             this.lblNewUserCreated.Visible = false;
@@ -299,7 +412,7 @@
             this.lblAddUser.AutoSize = true;
             this.lblAddUser.Location = new System.Drawing.Point(359, 277);
             this.lblAddUser.Name = "lblAddUser";
-            this.lblAddUser.Size = new System.Drawing.Size(76, 20);
+            this.lblAddUser.Size = new System.Drawing.Size(113, 29);
             this.lblAddUser.TabIndex = 1;
             this.lblAddUser.Text = "Add User";
             // 
@@ -320,7 +433,7 @@
             this.txtPassword.Location = new System.Drawing.Point(155, 190);
             this.txtPassword.MaxLength = 30;
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(285, 26);
+            this.txtPassword.Size = new System.Drawing.Size(285, 35);
             this.txtPassword.TabIndex = 8;
             this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtPassword_KeyPress);
@@ -329,9 +442,9 @@
             // txtScreenName
             // 
             this.txtScreenName.Location = new System.Drawing.Point(155, 158);
-            this.txtScreenName.MaxLength = 30;
+            this.txtScreenName.MaxLength = global::Math_Monkeys.Properties.Settings.Default.StudentIDMax;
             this.txtScreenName.Name = "txtScreenName";
-            this.txtScreenName.Size = new System.Drawing.Size(285, 26);
+            this.txtScreenName.Size = new System.Drawing.Size(285, 35);
             this.txtScreenName.TabIndex = 7;
             this.txtScreenName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtScreenName_KeyPress);
             this.txtScreenName.Validating += new System.ComponentModel.CancelEventHandler(this.txtScreenName_Validating);
@@ -341,7 +454,7 @@
             this.txtLastName.Location = new System.Drawing.Point(155, 126);
             this.txtLastName.MaxLength = 30;
             this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(285, 26);
+            this.txtLastName.Size = new System.Drawing.Size(285, 35);
             this.txtLastName.TabIndex = 6;
             this.txtLastName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLastName_KeyPress);
             this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.txtLastName_Validating);
@@ -351,7 +464,7 @@
             this.txtFirstName.Location = new System.Drawing.Point(155, 94);
             this.txtFirstName.MaxLength = 30;
             this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(285, 26);
+            this.txtFirstName.Size = new System.Drawing.Size(285, 35);
             this.txtFirstName.TabIndex = 5;
             this.txtFirstName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFirstName_KeyPress);
             this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.txtFirstName_Validating);
@@ -372,7 +485,7 @@
             this.rbtAdmin.AutoSize = true;
             this.rbtAdmin.Location = new System.Drawing.Point(195, 25);
             this.rbtAdmin.Name = "rbtAdmin";
-            this.rbtAdmin.Size = new System.Drawing.Size(121, 24);
+            this.rbtAdmin.Size = new System.Drawing.Size(179, 33);
             this.rbtAdmin.TabIndex = 1;
             this.rbtAdmin.TabStop = true;
             this.rbtAdmin.Text = "Administrator";
@@ -384,7 +497,7 @@
             this.rbtStudent.Checked = true;
             this.rbtStudent.Location = new System.Drawing.Point(74, 25);
             this.rbtStudent.Name = "rbtStudent";
-            this.rbtStudent.Size = new System.Drawing.Size(84, 24);
+            this.rbtStudent.Size = new System.Drawing.Size(120, 33);
             this.rbtStudent.TabIndex = 0;
             this.rbtStudent.TabStop = true;
             this.rbtStudent.Text = "Student";
@@ -395,7 +508,7 @@
             this.lblPassword.AutoSize = true;
             this.lblPassword.Location = new System.Drawing.Point(67, 193);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(82, 20);
+            this.lblPassword.Size = new System.Drawing.Size(126, 29);
             this.lblPassword.TabIndex = 3;
             this.lblPassword.Text = "Password:";
             // 
@@ -404,7 +517,7 @@
             this.lblScreenName.AutoSize = true;
             this.lblScreenName.Location = new System.Drawing.Point(39, 161);
             this.lblScreenName.Name = "lblScreenName";
-            this.lblScreenName.Size = new System.Drawing.Size(110, 20);
+            this.lblScreenName.Size = new System.Drawing.Size(167, 29);
             this.lblScreenName.TabIndex = 2;
             this.lblScreenName.Text = "Screen Name:";
             // 
@@ -413,7 +526,7 @@
             this.lblLastName.AutoSize = true;
             this.lblLastName.Location = new System.Drawing.Point(59, 129);
             this.lblLastName.Name = "lblLastName";
-            this.lblLastName.Size = new System.Drawing.Size(90, 20);
+            this.lblLastName.Size = new System.Drawing.Size(134, 29);
             this.lblLastName.TabIndex = 1;
             this.lblLastName.Text = "Last Name:";
             // 
@@ -422,17 +535,17 @@
             this.lblFirstName.AutoSize = true;
             this.lblFirstName.Location = new System.Drawing.Point(59, 97);
             this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(90, 20);
+            this.lblFirstName.Size = new System.Drawing.Size(137, 29);
             this.lblFirstName.TabIndex = 0;
             this.lblFirstName.Text = "First Name:";
             // 
             // tbpProblemSet
             // 
             this.tbpProblemSet.Controls.Add(this.gbxCreateProblemSet);
-            this.tbpProblemSet.Location = new System.Drawing.Point(4, 29);
+            this.tbpProblemSet.Location = new System.Drawing.Point(4, 38);
             this.tbpProblemSet.Name = "tbpProblemSet";
             this.tbpProblemSet.Padding = new System.Windows.Forms.Padding(3);
-            this.tbpProblemSet.Size = new System.Drawing.Size(1077, 802);
+            this.tbpProblemSet.Size = new System.Drawing.Size(1040, 527);
             this.tbpProblemSet.TabIndex = 4;
             this.tbpProblemSet.Text = "Problem Sets";
             this.tbpProblemSet.UseVisualStyleBackColor = true;
@@ -458,7 +571,7 @@
             this.lblCreateSet.AutoSize = true;
             this.lblCreateSet.Location = new System.Drawing.Point(315, 412);
             this.lblCreateSet.Name = "lblCreateSet";
-            this.lblCreateSet.Size = new System.Drawing.Size(86, 20);
+            this.lblCreateSet.Size = new System.Drawing.Size(127, 29);
             this.lblCreateSet.TabIndex = 11;
             this.lblCreateSet.Text = "Create Set";
             // 
@@ -491,7 +604,7 @@
             this.lblRangeMax2.AutoSize = true;
             this.lblRangeMax2.Location = new System.Drawing.Point(72, 66);
             this.lblRangeMax2.Name = "lblRangeMax2";
-            this.lblRangeMax2.Size = new System.Drawing.Size(94, 20);
+            this.lblRangeMax2.Size = new System.Drawing.Size(140, 29);
             this.lblRangeMax2.TabIndex = 3;
             this.lblRangeMax2.Text = "Range Max:";
             // 
@@ -500,7 +613,7 @@
             this.txtRangeMax2.Location = new System.Drawing.Point(168, 63);
             this.txtRangeMax2.MaxLength = 5;
             this.txtRangeMax2.Name = "txtRangeMax2";
-            this.txtRangeMax2.Size = new System.Drawing.Size(125, 26);
+            this.txtRangeMax2.Size = new System.Drawing.Size(125, 35);
             this.txtRangeMax2.TabIndex = 2;
             this.txtRangeMax2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRangeMax2_KeyPress);
             // 
@@ -509,7 +622,7 @@
             this.lblRangeMin2.AutoSize = true;
             this.lblRangeMin2.Location = new System.Drawing.Point(72, 34);
             this.lblRangeMin2.Name = "lblRangeMin2";
-            this.lblRangeMin2.Size = new System.Drawing.Size(90, 20);
+            this.lblRangeMin2.Size = new System.Drawing.Size(135, 29);
             this.lblRangeMin2.TabIndex = 1;
             this.lblRangeMin2.Text = "Range Min:";
             // 
@@ -518,7 +631,7 @@
             this.txtRangeMin2.Location = new System.Drawing.Point(168, 31);
             this.txtRangeMin2.MaxLength = 5;
             this.txtRangeMin2.Name = "txtRangeMin2";
-            this.txtRangeMin2.Size = new System.Drawing.Size(125, 26);
+            this.txtRangeMin2.Size = new System.Drawing.Size(125, 35);
             this.txtRangeMin2.TabIndex = 0;
             this.txtRangeMin2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRangeMin2_KeyPress);
             // 
@@ -540,7 +653,7 @@
             this.lblRangeMax1.AutoSize = true;
             this.lblRangeMax1.Location = new System.Drawing.Point(72, 66);
             this.lblRangeMax1.Name = "lblRangeMax1";
-            this.lblRangeMax1.Size = new System.Drawing.Size(94, 20);
+            this.lblRangeMax1.Size = new System.Drawing.Size(140, 29);
             this.lblRangeMax1.TabIndex = 3;
             this.lblRangeMax1.Text = "Range Max:";
             // 
@@ -549,7 +662,7 @@
             this.txtRangeMax1.Location = new System.Drawing.Point(168, 63);
             this.txtRangeMax1.MaxLength = 5;
             this.txtRangeMax1.Name = "txtRangeMax1";
-            this.txtRangeMax1.Size = new System.Drawing.Size(125, 26);
+            this.txtRangeMax1.Size = new System.Drawing.Size(125, 35);
             this.txtRangeMax1.TabIndex = 2;
             this.txtRangeMax1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRangeMax1_KeyPress);
             // 
@@ -558,7 +671,7 @@
             this.lblRangeMin1.AutoSize = true;
             this.lblRangeMin1.Location = new System.Drawing.Point(72, 34);
             this.lblRangeMin1.Name = "lblRangeMin1";
-            this.lblRangeMin1.Size = new System.Drawing.Size(90, 20);
+            this.lblRangeMin1.Size = new System.Drawing.Size(135, 29);
             this.lblRangeMin1.TabIndex = 1;
             this.lblRangeMin1.Text = "Range Min:";
             // 
@@ -567,7 +680,7 @@
             this.txtRangeMin1.Location = new System.Drawing.Point(168, 31);
             this.txtRangeMin1.MaxLength = 5;
             this.txtRangeMin1.Name = "txtRangeMin1";
-            this.txtRangeMin1.Size = new System.Drawing.Size(125, 26);
+            this.txtRangeMin1.Size = new System.Drawing.Size(125, 35);
             this.txtRangeMin1.TabIndex = 0;
             this.txtRangeMin1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtRangeMin1_KeyPress);
             // 
@@ -576,7 +689,7 @@
             this.txtProblemSetName.Location = new System.Drawing.Point(93, 34);
             this.txtProblemSetName.MaxLength = 30;
             this.txtProblemSetName.Name = "txtProblemSetName";
-            this.txtProblemSetName.Size = new System.Drawing.Size(308, 26);
+            this.txtProblemSetName.Size = new System.Drawing.Size(308, 35);
             this.txtProblemSetName.TabIndex = 0;
             this.txtProblemSetName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtProblemSetName_KeyPress);
             this.txtProblemSetName.Validating += new System.ComponentModel.CancelEventHandler(this.txtProblemSetName_Validating);
@@ -600,7 +713,7 @@
             this.rbtDivide.Image = global::Math_Monkeys.Properties.Resources.Divide;
             this.rbtDivide.Location = new System.Drawing.Point(297, 20);
             this.rbtDivide.Name = "rbtDivide";
-            this.rbtDivide.Size = new System.Drawing.Size(46, 32);
+            this.rbtDivide.Size = new System.Drawing.Size(53, 32);
             this.rbtDivide.TabIndex = 3;
             this.rbtDivide.UseVisualStyleBackColor = true;
             // 
@@ -611,7 +724,7 @@
             this.rbtSubtraction.Image = global::Math_Monkeys.Properties.Resources.Subtraction;
             this.rbtSubtraction.Location = new System.Drawing.Point(113, 20);
             this.rbtSubtraction.Name = "rbtSubtraction";
-            this.rbtSubtraction.Size = new System.Drawing.Size(46, 32);
+            this.rbtSubtraction.Size = new System.Drawing.Size(53, 32);
             this.rbtSubtraction.TabIndex = 1;
             this.rbtSubtraction.UseVisualStyleBackColor = true;
             // 
@@ -621,7 +734,7 @@
             this.rbtTimes.Image = global::Math_Monkeys.Properties.Resources.times;
             this.rbtTimes.Location = new System.Drawing.Point(205, 20);
             this.rbtTimes.Name = "rbtTimes";
-            this.rbtTimes.Size = new System.Drawing.Size(46, 32);
+            this.rbtTimes.Size = new System.Drawing.Size(53, 32);
             this.rbtTimes.TabIndex = 2;
             this.rbtTimes.UseVisualStyleBackColor = true;
             // 
@@ -632,7 +745,7 @@
             this.rbtAddition.Image = global::Math_Monkeys.Properties.Resources.Plus;
             this.rbtAddition.Location = new System.Drawing.Point(21, 20);
             this.rbtAddition.Name = "rbtAddition";
-            this.rbtAddition.Size = new System.Drawing.Size(46, 32);
+            this.rbtAddition.Size = new System.Drawing.Size(53, 32);
             this.rbtAddition.TabIndex = 0;
             this.rbtAddition.TabStop = true;
             this.rbtAddition.UseVisualStyleBackColor = true;
@@ -642,7 +755,7 @@
             this.lblName.AutoSize = true;
             this.lblName.Location = new System.Drawing.Point(32, 37);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(55, 20);
+            this.lblName.Size = new System.Drawing.Size(84, 29);
             this.lblName.TabIndex = 0;
             this.lblName.Text = "Name:";
             // 
@@ -650,11 +763,11 @@
             // 
             this.tbpSettings.DataBindings.Add(new System.Windows.Forms.Binding("Font", global::Math_Monkeys.Properties.Settings.Default, "adminFont", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tbpSettings.Font = global::Math_Monkeys.Properties.Settings.Default.adminFont;
-            this.tbpSettings.Location = new System.Drawing.Point(4, 29);
+            this.tbpSettings.Location = new System.Drawing.Point(4, 38);
             this.tbpSettings.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbpSettings.Name = "tbpSettings";
             this.tbpSettings.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tbpSettings.Size = new System.Drawing.Size(1077, 802);
+            this.tbpSettings.Size = new System.Drawing.Size(1040, 527);
             this.tbpSettings.TabIndex = 2;
             this.tbpSettings.Text = "Settings";
             this.tbpSettings.UseVisualStyleBackColor = true;
@@ -676,7 +789,7 @@
             this.lblLogout.AutoSize = true;
             this.lblLogout.Location = new System.Drawing.Point(1026, 1006);
             this.lblLogout.Name = "lblLogout";
-            this.lblLogout.Size = new System.Drawing.Size(59, 20);
+            this.lblLogout.Size = new System.Drawing.Size(87, 29);
             this.lblLogout.TabIndex = 3;
             this.lblLogout.Text = "Logout";
             // 
@@ -699,7 +812,7 @@
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(9, 36);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(213, 25);
+            this.lblTitle.Size = new System.Drawing.Size(321, 37);
             this.lblTitle.TabIndex = 4;
             this.lblTitle.Text = "Administrator Control";
             // 
@@ -708,7 +821,7 @@
             this.lblWelcome.AutoSize = true;
             this.lblWelcome.Location = new System.Drawing.Point(13, 61);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(79, 20);
+            this.lblWelcome.Size = new System.Drawing.Size(121, 29);
             this.lblWelcome.TabIndex = 5;
             this.lblWelcome.Text = "Welcome:";
             // 
@@ -717,7 +830,7 @@
             this.lblAdminName.AutoSize = true;
             this.lblAdminName.Location = new System.Drawing.Point(98, 61);
             this.lblAdminName.Name = "lblAdminName";
-            this.lblAdminName.Size = new System.Drawing.Size(129, 20);
+            this.lblAdminName.Size = new System.Drawing.Size(192, 29);
             this.lblAdminName.TabIndex = 6;
             this.lblAdminName.Text = "<ADMIN NAME>";
             // 
@@ -727,7 +840,7 @@
             this.lblLastLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLastLogin.Location = new System.Drawing.Point(33, 81);
             this.lblLastLogin.Name = "lblLastLogin";
-            this.lblLastLogin.Size = new System.Drawing.Size(59, 13);
+            this.lblLastLogin.Size = new System.Drawing.Size(93, 20);
             this.lblLastLogin.TabIndex = 7;
             this.lblLastLogin.Text = "Last Login:";
             // 
@@ -737,7 +850,7 @@
             this.lblLoginDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLoginDate.Location = new System.Drawing.Point(100, 81);
             this.lblLoginDate.Name = "lblLoginDate";
-            this.lblLoginDate.Size = new System.Drawing.Size(141, 13);
+            this.lblLoginDate.Size = new System.Drawing.Size(212, 20);
             this.lblLoginDate.TabIndex = 8;
             this.lblLoginDate.Text = " MM/DD/YYYY HH:MM PM";
             // 
@@ -747,7 +860,7 @@
             this.lblCurrentTime.AutoSize = true;
             this.lblCurrentTime.Location = new System.Drawing.Point(663, 36);
             this.lblCurrentTime.Name = "lblCurrentTime";
-            this.lblCurrentTime.Size = new System.Drawing.Size(436, 20);
+            this.lblCurrentTime.Size = new System.Drawing.Size(639, 29);
             this.lblCurrentTime.TabIndex = 9;
             this.lblCurrentTime.Text = "WEDNESDAY, DECEMBERERERE DD, YYYY HH:MM PM";
             this.lblCurrentTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -774,41 +887,41 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1111, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1111, 33);
             this.menuStrip1.TabIndex = 10;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(50, 29);
             this.fileToolStripMenuItem.Text = "&File";
             // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(61, 29);
             this.helpToolStripMenuItem.Text = "&Help";
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 719);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 711);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1111, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1111, 30);
             this.statusStrip1.TabIndex = 11;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(181, 25);
             this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
             // 
             // frmAdminControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1111, 741);
             this.Controls.Add(this.statusStrip1);
@@ -836,6 +949,7 @@
             this.gbxReportDates.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReport)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.studentBindingSource)).EndInit();
             this.tbpStudents.ResumeLayout(false);
             this.gbxCreateNewUser.ResumeLayout(false);
             this.gbxCreateNewUser.PerformLayout();
@@ -912,7 +1026,6 @@
         private System.Windows.Forms.Label lblRangeMin1;
         private System.Windows.Forms.TextBox txtRangeMin1;
         private System.Windows.Forms.TextBox txtProblemSetName;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn clmCheckBox;
         private System.Windows.Forms.Label lblCreateSet;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblWelcome;
@@ -929,5 +1042,16 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn clmCheckBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn screenNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastLoginDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn userTypeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn getUserTypeStringDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn passwordDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn getFullNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource studentBindingSource;
     }
 }

@@ -3,13 +3,13 @@
 	<problemSet>
 		<id></id>
 		<name></name>
-		<operation></operation>
-		<operands>
-			<operand>
-				<rangeMin></rangeMin>
-				<rangeMax></rangeMax>
-			</operand>
-		</operands>
+			<operation></operation>
+			<operands>
+				<operand>
+					<rangeMin></rangeMin>
+					<rangeMax></rangeMax>
+				</operand>
+			</operands>	
 		<numberOfProblems></numberOfProblems>
 	</problemSet>
 </problemSets>

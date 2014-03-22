@@ -282,14 +282,7 @@ namespace Math_Monkeys
             MMControl.NameOnly(sender, e);
         }
 
-        private void dgvReport_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-
-
-      
+       
 
 
  

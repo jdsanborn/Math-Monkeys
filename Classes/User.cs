@@ -12,6 +12,9 @@
  * 15 March 2013 Harvey Mercado & Jonathan Sanborn
  * Updated user class to match changes made to XML structure
  * 
+ * 21 March 2013 Jonathan Sanborn
+ * Reorgnazied code to make it easier to read
+ * 
  * * */
 
 
@@ -21,32 +24,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
+using System.Xml.Linq;
 using System.IO;
 
 namespace Math_Monkeys
 {
-     [XmlType("type")]
-    public enum UserType 
-    {
-        [XmlEnum(Name = "None")]
-        None,
-
-        [XmlEnum(Name = "Administrator")]
-        Administrator,
-
-        [XmlEnum(Name = "Student")]
-        Student
-    };
 
     [XmlType("User")]
-    public class User
+    public class User:IComparable
     {
-        //private int _uniqueId;
-        //private string _fullName;
-        //private string _userType;
-        //private DateTime? _LoginDate;
-
-
         #region Member Variables
 
         private string id;
@@ -61,7 +47,7 @@ namespace Math_Monkeys
 
         #region properties
 
-        [XmlElement("id")]
+        [XmlElement("ID")]
         public string ID 
         { 
             get
@@ -76,7 +62,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("date")]
+        [XmlElement("Date")]
         public DateTime? LastLoginDate
         {
             get 
@@ -96,7 +82,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("type")]
+        [XmlElement("Type")]
         public UserType UserType
         {
             get
@@ -117,7 +103,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("first")]
+        [XmlElement("First")]
         public string FirstName
         {
             get { return firstName; }
@@ -133,7 +119,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("last")]
+        [XmlElement("Last")]
         public string LastName
         {
             get { return lastName; }
@@ -150,7 +136,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("screenName")]
+        [XmlElement("ScreenName")]
         public string ScreenName
         {
             get { return screenName; }
@@ -160,6 +146,17 @@ namespace Math_Monkeys
                 {
                     screenName = string.Empty;
                 }
+                else if (value.Length > Properties.Settings.Default.StudentIDMax)
+                {
+                    value = value.Trim();
+                    value = value.Substring(0, Properties.Settings.Default.StudentIDMax);
+                    screenName = value;
+                }
+                else if (value.Length < Properties.Settings.Default.StudentIDMin)
+                {
+                    throw new FormatException("Value Screen Name is too short. Screen Name value must be at least "
+                        + Properties.Settings.Default.StudentIDMin.ToString() + " characters long.");
+                }
                 else
                 {
                     screenName = value;
@@ -167,7 +164,7 @@ namespace Math_Monkeys
             }
         }
 
-        [XmlElement("password")]
+        [XmlElement("Password")]
         public string Password
         {
             get
@@ -208,35 +205,89 @@ namespace Math_Monkeys
             Password = string.Empty;
         }
 
+        /// <summary>
+        /// This method will compare two user objects for sorting.
+        /// Jonathan Sanborn & Harvey Mercado
+        /// 22 March 2014
+        /// </summary>
+        /// <param name="obj"> A user object to compare with this one. </param>
+        /// <returns> int value based on user comparison</returns>
+        public int CompareTo(object obj)
+        {
+            if (obj == null)
+            { 
+                return 1; 
+            }
+
+            User otherUser = obj as User;
+
+            if (otherUser != null)
+            {
+                if (otherUser.UserType != this.UserType)
+                {
+                    return this.UserType.CompareTo(otherUser.UserType);
+                }
+
+                else
+                {
+                    return this.ScreenName.CompareTo(otherUser.ScreenName);
+                }
+            
+            }
+
+            else
+            { 
+                throw new ArgumentException("Object is not a user"); 
+            }
+        }
+
 
         #region constructors
 
+        /// <summary>
+        /// Default Constructor, creates an instance of User object.
+        /// </summary>
         public User()
         {
             init();
         }
 
+        /// <summary>
+        /// Parameterized Constructor, creates an instancte of the user object with the passes in values
+        /// </summary>
+        /// <param name="id">A unique ID indentify the user</param>
+        /// <param name="userType">A UserType Enumration value</param>
+        /// <param name="fistName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="screenName"></param>
+        /// <param name="password"></param>
         public User(string id, UserType userType, string fistName, string lastName, string screenName, string password )
         {
             init();
 
-            //-1 value will not show up and will be assigned by the XML file
             this.ID = id;
             this.UserType = userType;
             this.FirstName = fistName;
             this.LastName = lastName;
 			this.ScreenName = screenName;
-            this.Password = password;
-
-            //Name needs to be first and last
-			//_fullName = fullName;
-						
-			//userType changed to enumeration
-            //_userType = userType;
+            this.Password = password;  
         }
 
         #endregion
 
+
+        #region Depracated Code
+
+        //private int _uniqueId;
+        //private string _fullName;
+        //private string _userType;
+        //private DateTime? _LoginDate;
+
+        //Name needs to be first and last
+		//_fullName = fullName;
+						
+		//userType changed to enumeration
+        //_userType = userType;
 
         //Replaced by first and last names
         //// Fields
@@ -285,6 +336,8 @@ namespace Math_Monkeys
         //        _userType = value;
         //    }// return "A" for Admin or "E" for EndUser
         //}
+
+        #endregion
 
     }
 }

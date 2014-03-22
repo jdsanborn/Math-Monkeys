@@ -9,13 +9,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Math_Monkeys
 {
+     [XmlType("User")]
     class Admin : User
     {
-        private User ptrUser;
-
         private void init()
         {
 

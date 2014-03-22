@@ -47,7 +47,10 @@ namespace Math_Monkeys
 
         internal List<User> AllUserList
         {
-            get { return allUserList; }
+            get {
+                allUserList.Sort();
+                return allUserList; 
+            }
             set { allUserList = value; }
         }
 
@@ -130,25 +133,8 @@ namespace Math_Monkeys
 
         public void Login(object sender, EventArgs e)
         {
-            if (currentUser == null)
-            {
-                ////NEED SOME CODE HERE
-            }
-            else
-            {
-                LoginForm.Hide();
-                LoginForm.Close();
-                if (currentUser.UserType == UserType.Student)
-                {
-                    StudentForm = new Math_Problem_Screen(this);
-                    StudentForm.ShowDialog();
-                }
-                else if (currentUser.UserType == UserType.Administrator)
-                {
-                    AdminForm = new frmAdminControl(this);
-                    AdminForm.ShowDialog();
-                }
-            }
+            LoginUser();
+
         }
 
         public void LoginFormClosing(object sender, EventArgs e)
@@ -228,6 +214,53 @@ namespace Math_Monkeys
         #endregion
 
         #region Methods
+
+        internal void LoginUser()
+        {
+            if (currentUser == null)
+            {
+                ////NEED SOME CODE HERE
+            }
+            else
+            {
+                TextBox txtPassword = LoginForm.Controls.Find("txtPassword", true)[0] as TextBox;
+                if (AuthenticateUser(CurrentUser, txtPassword.Text))
+                {
+                    LoginForm.Hide();
+                    LoginForm.Close();
+                    if (currentUser.UserType == UserType.Student)
+                    {
+                        StudentForm = new Math_Problem_Screen(this);
+                        StudentForm.ShowDialog();
+                    }
+                    else if (currentUser.UserType == UserType.Administrator)
+                    {
+                        AdminForm = new frmAdminControl(this);
+                        AdminForm.ShowDialog();
+                    }
+                }
+
+                else
+                {
+                    txtPassword.Text = string.Empty;
+                    MessageBox.Show("Wrong Password", "Wrong Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+        }
+
+        internal bool AuthenticateUser(User user, string password)
+        {
+            if (user.Password != password)
+            {
+                return false;
+            }
+
+            else
+            {
+                return true;
+            }
+        }
 
         internal void AddNewStudent(Student newUser)
         {
